@@ -113,7 +113,7 @@ export function Contact() {
             className="text-h1 font-heading font-semibold tracking-tight text-foreground mb-6"
             variants={itemVariants}
           >
-            Let's <span className="text-primary">work together</span>
+            Let&apos;s <span className="text-primary">work together</span>
           </motion.h2>
           <motion.p
             className="text-body-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto"
@@ -121,7 +121,7 @@ export function Contact() {
           >
             Currently seeking paid internships and professional opportunities in Data Science,
             AI, and Healthcare Technology. Open to remote and international roles.
-          </motion.p>
+          </motion.p
         </motion.div>
 
         {/* Contact Layout - Editorial Grid */}
@@ -264,7 +264,7 @@ export function Contact() {
                     placeholder="Your name"
                     value={formData.name}
                     onChange={handleChange}
-                    error={errors.name}
+                    error={errors.name || undefined}
                     required
                     autoComplete="name"
                     className="w-full"
@@ -276,7 +276,7 @@ export function Contact() {
                     placeholder="you@example.com"
                     value={formData.email}
                     onChange={handleChange}
-                    error={errors.email}
+                    error={errors.email || undefined}
                     required
                     autoComplete="email"
                     className="w-full"
@@ -289,7 +289,7 @@ export function Contact() {
                   placeholder="Internship opportunity / Collaboration / Question"
                   value={formData.subject}
                   onChange={handleChange}
-                  error={errors.subject}
+                  error={errors.subject || undefined}
                   required
                   className="w-full"
                 />
@@ -300,7 +300,7 @@ export function Contact() {
                   placeholder="Tell me about your project, role, or question... (minimum 20 characters)"
                   value={formData.message}
                   onChange={handleChange}
-                  error={errors.message}
+                  error={errors.message || undefined}
                   required
                   rows={5}
                   className="w-full"
