@@ -1,29 +1,7 @@
 import type { Metadata, Viewport } from 'next'
-import { Exo, Roboto_Mono, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { StructuredData } from '@/components/StructuredData'
 import { ThemeProvider } from '@/components/ThemeProvider'
-
-const exo = Exo({
-  subsets: ['latin'],
-  variable: '--font-exo',
-  display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
-})
-
-const robotoMono = Roboto_Mono({
-  subsets: ['latin'],
-  variable: '--font-roboto-mono',
-  display: 'swap',
-  weight: ['300', '400', '500', '700'],
-})
-
-const jetbrains = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
-  display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kavyashah.dev'),
@@ -91,7 +69,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${exo.variable} ${robotoMono.variable} ${jetbrains.variable}`} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <StructuredData />
       </head>
