@@ -264,7 +264,8 @@ export function Contact() {
                     placeholder="Your name"
                     value={formData.name}
                     onChange={handleChange}
-                    error={errors.name || undefined}
+                    error={!!errors.name}
+                    errorMessage={errors.name}
                     required
                     autoComplete="name"
                     className="w-full"
@@ -276,7 +277,8 @@ export function Contact() {
                     placeholder="you@example.com"
                     value={formData.email}
                     onChange={handleChange}
-                    error={errors.email || undefined}
+                    error={!!errors.email}
+                    errorMessage={errors.email}
                     required
                     autoComplete="email"
                     className="w-full"
@@ -289,7 +291,8 @@ export function Contact() {
                   placeholder="Internship opportunity / Collaboration / Question"
                   value={formData.subject}
                   onChange={handleChange}
-                  error={errors.subject || undefined}
+                  error={!!errors.subject}
+                  errorMessage={errors.subject}
                   required
                   className="w-full"
                 />
@@ -300,7 +303,8 @@ export function Contact() {
                   placeholder="Tell me about your project, role, or question... (minimum 20 characters)"
                   value={formData.message}
                   onChange={handleChange}
-                  error={errors.message || undefined}
+                  error={!!errors.message}
+                  errorMessage={errors.message}
                   required
                   rows={5}
                   className="w-full"
