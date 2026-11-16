@@ -1,21 +1,21 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
+import { Exo, Roboto_Mono, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { StructuredData } from '@/components/StructuredData'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
-const inter = Inter({
+const exo = Exo({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  variable: '--font-exo',
   display: 'swap',
   weight: ['300', '400', '500', '600', '700'],
 })
 
-const playfair = Playfair_Display({
+const robotoMono = Roboto_Mono({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  variable: '--font-roboto-mono',
   display: 'swap',
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '700'],
 })
 
 const jetbrains = JetBrains_Mono({
@@ -26,6 +26,7 @@ const jetbrains = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://kavyashah.dev'),
   title: {
     default: 'Kavya Shah — Data Science & AI Portfolio',
     template: '%s | Kavya Shah',
@@ -76,8 +77,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FAFAF9' },
-    { media: '(prefers-color-scheme: dark)', color: '#0C0A09' },
+    { media: '(prefers-color-scheme: light)', color: '#F0F9FF' },
+    { media: '(prefers-color-scheme: dark)', color: '#0C1D2E' },
   ],
   width: 'device-width',
   initialScale: 1,
@@ -90,18 +91,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" class={`${inter.variable} ${playfair.variable} ${jetbrains.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${exo.variable} ${robotoMono.variable} ${jetbrains.variable}`} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <StructuredData />
       </head>
       <body className="min-h-screen bg-background font-body antialiased">
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )

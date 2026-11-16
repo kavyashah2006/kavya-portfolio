@@ -428,24 +428,52 @@ export const professionalJourney = [
     title: 'Secondary School Examination — CBSE',
     description: 'Radiant English Academy. Foundational secondary education focused on core academic knowledge, logical reasoning, and problem-solving skills.',
     category: 'education',
+    highlights: [
+      'Developed core academic foundation in mathematics and sciences',
+      'Strengthened logical reasoning and analytical thinking',
+      'Built communication and learning fundamentals',
+    ],
+    technologies: ['Mathematics', 'Science', 'Critical Thinking'],
   },
   {
     year: '2023–2024',
     title: 'Senior School Certificate — CBSE',
     description: 'Radiant English Academy. Science Stream with focus on scientific foundations and analytical reasoning. Developed Home Services Booking & Subscription Web Application using Python and MySQL.',
     category: 'education',
+    highlights: [
+      'Completed Science Stream with focus on analytical reasoning',
+      'Developed full-stack Home Services Booking Web Application',
+      'Applied Python and MySQL to solve real-world problems',
+      'Designed relational database schema for booking system',
+    ],
+    technologies: ['Python', 'MySQL', 'Web Development', 'SQL', 'Database Design'],
   },
   {
     year: '2025',
     title: 'Started BSc Data Science at Ca\' Foscari University of Venice',
     description: 'Began undergraduate studies in Data Science, AI, and Health Informatics. Started developing the VitaVerse digital health concept.',
     category: 'education',
+    highlights: [
+      'Enrolled in BSc Data Science program (EQF Level 6)',
+      'Began studies in ML, Statistics, Database Systems, Software Engineering',
+      'Initiated VitaVerse digital health platform concept',
+      'Achieved IELTS C1 certification (Proficient User)',
+    ],
+    technologies: ['Python', 'Statistics', 'Machine Learning', 'Databases', 'Software Engineering'],
   },
   {
     year: '2026',
     title: 'Data Analyst Internship at Digitattva Technolabs',
     description: 'Remote internship focusing on Python, SQL, data analysis, cleaning, and reporting. Completed university programming projects in C and C++ (Pac-Man Engine, Procedural Dungeon Adventure).',
     category: 'experience',
+    highlights: [
+      'Completed 206-hour remote Data Analyst internship',
+      'Cleaned and processed datasets using Python and SQL',
+      'Built Pac-Man Game Engine in C++17 (university project)',
+      'Developed Procedural Dungeon Adventure Game in C',
+      'Mastered OOP, memory management, and serialization',
+    ],
+    technologies: ['Python', 'SQL', 'MySQL', 'C', 'C++17', 'Data Analysis', 'OOP', 'XML'],
   },
 ]
 
