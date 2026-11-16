@@ -1,11 +1,10 @@
-# Robots.txt for Kavya Shah Portfolio
+# robots.txt for kavyashah.dev
 User-agent: *
 Allow: /
 
-# Sitemap
 Sitemap: https://kavyashah.dev/sitemap.xml
 
 # Disallow private/admin areas
 Disallow: /api/
 Disallow: /_next/
-Disallow: /static/
+Disallow: /*.json$
