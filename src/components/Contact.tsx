@@ -121,7 +121,7 @@ export function Contact() {
           >
             Currently seeking paid internships and professional opportunities in Data Science,
             AI, and Healthcare Technology. Open to remote and international roles.
-          </motion.p
+          </motion.p>
         </motion.div>
 
         {/* Contact Layout - Editorial Grid */}
