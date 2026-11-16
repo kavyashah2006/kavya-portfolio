@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { StructuredData } from '@/components/StructuredData'
-import { ThemeProvider } from '@/components/ThemeProvider'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kavyashah.dev'),
@@ -74,7 +73,7 @@ export default function RootLayout({
         <StructuredData />
       </head>
       <body className="min-h-screen bg-background font-body antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
+        {children}
       </body>
     </html>
   )
