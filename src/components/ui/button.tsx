@@ -1,54 +1,33 @@
-'use client'
-
 import * as React from 'react'
-import { Slot } from '@radix-ui/react-slot'
 import { cn } from '@/lib/utils'
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'ghost' | 'link' | 'outline'
-  size?: 'sm' | 'md' | 'lg' | 'xl'
-  asChild?: boolean
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'ghost' | 'outline'
+  size?: 'sm' | 'md' | 'lg'
   loading?: boolean
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      variant = 'primary',
-      size = 'md',
-      asChild = false,
-      loading = false,
-      disabled,
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const Comp = asChild ? Slot : 'button'
-    const baseStyles =
-      'inline-flex items-center justify-center gap-2 font-medium transition-all duration-base ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]'
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = 'primary', size = 'md', loading, disabled, children, ...props }, ref) => {
+    const baseStyles = 'inline-flex items-center justify-center font-medium font-heading rounded-xl transition-all duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
 
     const variants = {
-      primary: 'btn-primary',
+      primary: 'btn-primary shadow-elevation-1',
       secondary: 'btn-secondary',
       ghost: 'btn-ghost',
-      link: 'btn-link',
-      outline: 'btn border border-border bg-transparent hover:bg-muted',
+      outline: 'border border-border/50 bg-transparent hover:bg-accent/5 hover:border-accent/30 text-foreground',
     }
 
     const sizes = {
-      sm: 'rounded-sm px-4 py-2 text-sm',
-      md: 'rounded-sm px-6 py-3 text-sm',
-      lg: 'rounded-md px-8 py-4 text-base',
-      xl: 'rounded-lg px-10 py-5 text-lg',
+      sm: 'px-4 py-2 text-sm gap-1.5',
+      md: 'px-6 py-2.5 text-body gap-2',
+      lg: 'px-8 py-3.5 text-body-lg gap-2',
     }
 
     return (
-      <Comp
-        className={cn(baseStyles, variants[variant], sizes[size], className)}
+      <button
         ref={ref}
+        className={cn(baseStyles, variants[variant], sizes[size], className)}
         disabled={disabled || loading}
         {...props}
       >
@@ -66,7 +45,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               cy="12"
               r="10"
               stroke="currentColor"
-              strokeWidth="3"
+              strokeWidth="4"
             />
             <path
               className="opacity-75"
@@ -76,10 +55,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           </svg>
         )}
         {children}
-      </Comp>
+      </button>
     )
   }
 )
-Button.displayName = 'Button'
 
-export { Button }
+Button.displayName = 'Button'
