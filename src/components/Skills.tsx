@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import { skills } from '@/lib/data'
-import { Terminal, Database, BarChart2, Briefcase, Code, FileText, Palette, Zap } from 'lucide-react'
+import { Terminal, Database, BarChart2, Briefcase, FileText, Palette, Zap, Brain, GitBranch, Cloud } from 'lucide-react'
 
 const categoryIcons = {
   Programming: Terminal,
@@ -12,34 +12,52 @@ const categoryIcons = {
   Business: Briefcase,
   Tools: FileText,
   Design: Palette,
+  'Machine Learning': Brain,
+  'Cloud & DevOps': Cloud,
+  'Version Control': GitBranch,
 }
 
 const categoryColors = {
-  Programming: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
-  Database: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
-  Analytics: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
-  Business: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400',
-  Tools: 'bg-gray-100 text-gray-700 dark:bg-gray-700/30 dark:text-gray-400',
-  Design: 'bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-400',
+  Programming: 'bg-primary/10 text-primary border-primary/20',
+  Database: 'bg-accent/10 text-accent border-accent/20',
+  Analytics: 'bg-secondary/10 text-secondary border-secondary/20',
+  Business: 'bg-amber/10 text-amber-600 border-amber-200/50',
+  Tools: 'bg-muted-foreground/10 text-muted-foreground border-muted-foreground/20',
+  Design: 'bg-pink-500/10 text-pink-600 border-pink-200/50',
+  'Machine Learning': 'bg-violet-500/10 text-violet-600 border-violet-200/50',
+  'Cloud & DevOps': 'bg-cyan-500/10 text-cyan-600 border-cyan-200/50',
+  'Version Control': 'bg-orange-500/10 text-orange-600 border-orange-200/50',
 }
+
+const categoryOrder = [
+  'Programming',
+  'Machine Learning',
+  'Analytics',
+  'Database',
+  'Cloud & DevOps',
+  'Tools',
+  'Version Control',
+  'Design',
+  'Business',
+]
 
 const sectionVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.05,
+      staggerChildren: 0.08,
     },
   },
 }
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.6,
       ease: [0.16, 1, 0.3, 1],
     },
   },
@@ -52,8 +70,6 @@ export function Skills() {
     return acc
   }, {} as Record<string, typeof skills.technical>)
 
-  const categoryOrder = ['Programming', 'Database', 'Analytics', 'Business', 'Tools', 'Design']
-
   return (
     <section
       id="skills"
@@ -61,38 +77,38 @@ export function Skills() {
       aria-labelledby="skills-title"
     >
       <div className="container-custom">
+        {/* Section Header - Editorial */}
         <motion.div
-          className="max-w-3xl mx-auto text-center mb-16"
+          className="max-w-4xl mx-auto text-center mb-16 lg:mb-20"
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
           <motion.span
-            className="inline-block text-xs font-medium text-accent uppercase tracking-wider mb-4"
+            className="inline-block text-xs font-medium text-accent uppercase tracking-widest mb-4 font-heading"
             variants={itemVariants}
           >
-            Technical Skills
+            Chapter Two
           </motion.span>
           <motion.h2
             id="skills-title"
             className="text-h1 font-heading font-semibold tracking-tight text-foreground mb-6"
             variants={itemVariants}
           >
-            Tools & technologies I work with
+            Technical toolkit for <span className="text-primary">data science</span>, <span className="text-accent">AI</span> & <span className="text-secondary">engineering</span>
           </motion.h2>
           <motion.p
-            className="text-body-lg text-muted-foreground leading-relaxed"
+            className="text-body-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto"
             variants={itemVariants}
           >
-            Proficient in data science fundamentals with hands-on experience in
-            Python, SQL, and data analysis workflows.
+            Hands-on experience across the modern data stack — from Python and SQL to cloud deployment and ML model development.
           </motion.p>
         </motion.div>
 
-        {/* Technical Skills by Category */}
+        {/* Technical Skills by Category - Editorial Grid */}
         <motion.div
-          className="space-y-12"
+          className="space-y-10 lg:space-y-12"
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
@@ -103,69 +119,83 @@ export function Skills() {
             if (!categorySkills || categorySkills.length === 0) return null
 
             const Icon = categoryIcons[category as keyof typeof categoryIcons] || Zap
-            const colorClass = categoryColors[category as keyof typeof categoryColors] || 'bg-gray-100 text-gray-700'
+            const colorClass = categoryColors[category as keyof typeof categoryColors] || 'bg-muted-foreground/10 text-muted-foreground border-muted-foreground/20'
 
             return (
-              <motion.div
+              <motion.article
                 key={category}
+                className="card-editorial"
                 variants={itemVariants}
-                style={{ transitionDelay: `${catIndex * 100}ms` }}
+                style={{ transitionDelay: `${catIndex * 80}ms` }}
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${colorClass}`}>
-                    <Icon className="h-5 w-5" aria-hidden="true" />
+                <header className="flex items-center gap-4 mb-6 pb-4 border-b border-border/30">
+                  <div
+                    className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${colorClass}`}
+                    aria-hidden="true"
+                  >
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-h3 font-heading font-medium tracking-tight text-foreground">
-                    {category}
-                  </h3>
-                </div>
+                  <div>
+                    <h3 className="text-h3 font-heading font-medium tracking-tight text-foreground">
+                      {category}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {categorySkills.length} {categorySkills.length === 1 ? 'technology' : 'technologies'}
+                    </p>
+                  </div>
+                </header>
+
                 <div className="flex flex-wrap gap-3">
                   {categorySkills.map((skill, skillIndex) => (
                     <motion.span
                       key={skill.name}
-                      className="px-4 py-2 rounded-lg border border-border bg-card text-body font-medium text-foreground hover:border-accent/30 hover:bg-accent/5 transition-all duration-base cursor-default"
+                      className="group relative px-4 py-2.5 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm text-body font-medium text-foreground hover:border-accent/30 hover:bg-accent/5 hover:shadow-lg transition-all duration-normal cursor-default"
                       variants={itemVariants}
-                      style={{ transitionDelay: `${skillIndex * 30}ms` }}
+                      style={{ transitionDelay: `${skillIndex * 40}ms` }}
                     >
-                      {skill.name}
-                      <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-medium $
-                        skill.level === 'proficient'
-                          ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'
-                          : skill.level === 'advanced'
-                          ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
-                          : 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'
-                      }`}>
-                        {skill.level.charAt(0).toUpperCase() + skill.level.slice(1)}
+                      <span className="flex items-center gap-2">
+                        {skill.name}
+                        <span
+                          className={`ml-1 px-2 py-0.5 rounded-full text-xs font-medium font-heading ${
+                            skill.level === 'proficient'
+                              ? 'bg-emerald-500/10 text-emerald-600 border-emerald-200/50 border'
+                              : skill.level === 'advanced'
+                              ? 'bg-primary/10 text-primary border-primary/20 border'
+                              : 'bg-amber-500/10 text-amber-600 border-amber-200/50 border'
+                          }`}
+                        >
+                          {skill.level.charAt(0).toUpperCase() + skill.level.slice(1)}
+                        </span>
                       </span>
                     </motion.span>
                   ))}
                 </div>
-              </motion.div>
+              </motion.article>
             )
           })}
         </motion.div>
 
-        {/* Soft Skills */}
+        {/* Soft Skills - Editorial Cards */}
         <motion.div
-          className="mt-16 pt-16 border-t border-border"
+          className="mt-20 pt-16 border-t border-border/50"
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
           <motion.div
-            className="max-w-3xl mx-auto text-center mb-10"
+            className="max-w-4xl mx-auto text-center mb-12"
             variants={itemVariants}
           >
             <motion.span
-              className="inline-block text-xs font-medium text-accent uppercase tracking-wider mb-4"
+              className="inline-block text-xs font-medium text-accent uppercase tracking-widest mb-4 font-heading"
             >
               Soft Skills
             </motion.span>
             <motion.h3
               className="text-h2 font-heading font-medium tracking-tight text-foreground"
             >
-              How I work & collaborate
+              How I <span className="text-accent">work</span> & <span className="text-primary">collaborate</span>
             </motion.h3>
           </motion.div>
 
@@ -174,20 +204,36 @@ export function Skills() {
             variants={itemVariants}
           >
             {skills.soft.map((skill, index) => (
-              <motion.div
+              <motion.article
                 key={skill}
-                className="p-5 rounded-xl border border-border bg-card text-center hover:border-accent/30 hover:shadow-lg transition-all duration-base group"
+                className="group relative p-6 rounded-2xl border border-border/50 bg-background/50 backdrop-blur-sm text-center hover:border-accent/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-normal"
                 variants={itemVariants}
-                style={{ transitionDelay: `${index * 50}ms` }}
+                style={{ transitionDelay: `${index * 60}ms` }}
               >
-                <div className="w-12 h-12 mx-auto mb-3 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
-                  <Zap className="h-6 w-6 text-accent" aria-hidden="true" />
+                <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 group-hover:scale-105 transition-all duration-normal">
+                  <Zap className="h-7 w-7 text-accent" aria-hidden="true" />
                 </div>
-                <p className="text-body font-medium text-foreground">{skill}</p>
-              </motion.div>
+                <p className="text-body font-medium text-foreground mb-2">
+                  {skill}
+                </p>
+                <div className="h-1.5 w-full bg-muted rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-accent rounded-full"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: '100%' }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  />
+                </div>
+              </motion.article>
             ))}
           </motion.div>
         </motion.div>
+
+        {/* Section Divider */}
+        <div className="section-divider mt-16 lg:mt-20" aria-hidden="true">
+          <span>End of Chapter Two</span>
+        </div>
       </div>
     </section>
   )
