@@ -1,159 +1,59 @@
-# Kavya Shah — Personal Portfolio
+# Kavya Shah - Portfolio
 
-A premium, production-ready personal portfolio website for Kavya Shah — BSc Data Science student at Ca' Foscari University of Venice.
+Professional portfolio website for Kavya Shah — BSc Data Science student at Ca' Foscari University of Venice.
 
-## 🎯 Overview
+## Features
 
-This portfolio showcases:
-- **Academic background** — Ca' Foscari University of Venice, BSc Data Science
-- **Technical skills** — Python, SQL, MySQL, Data Analysis, Data Cleaning, Reporting
-- **Professional experience** — Data Analyst Intern at Digitattva Technolabs
-- **Featured projects** — Data Analysis Portfolio, VitaVerse healthcare platform concept
-- **Startup venture** — VitaVerse: AI-powered digital health platform
-- **Career interests** — AI/ML, Healthcare Technology, International Innovation, Social Impact
+- **Editorial Design System**: Premium magazine-style layout with glassmorphism effects
+- **Responsive Design**: Mobile-first approach with breakpoints at 375px, 768px, 1024px, 1440px
+- **Animations**: Scroll-triggered animations using Framer Motion with reduced-motion support
+- **Dark/Light Mode**: CSS variable-based theming with system preference detection
+- **Accessibility**: WCAG AA compliant with proper focus states, semantic HTML, and ARIA labels
+- **Performance**: Optimized images, lazy loading, and static export for fast delivery
 
-## 🎨 Design System
+## Tech Stack
 
-- **Typography**: Playfair Display (headings) + DM Sans (body) + JetBrains Mono (code)
-- **Color Palette**: Stone/Slate neutral base with Emerald accent
-- **Spacing**: 4px base unit with systematic scale (4px → 192px)
-- **Animations**: Framer Motion with reduced-motion support
-- **Responsive**: Mobile-first, breakpoints at 640/768/1024/1280/1536px
-- **Accessibility**: WCAG AA compliant, keyboard navigation, focus management
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Lucide React (icons)
+- Next.js Fonts (Exo, Roboto Mono, JetBrains Mono)
 
-## 🛠 Tech Stack
+## Sections
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Icons**: Lucide React
-- **Forms**: Native HTML5 with validation
-- **Fonts**: Google Fonts (Playfair Display, DM Sans, JetBrains Mono)
+1. **Hero** — Editorial introduction with animated background orbs
+2. **About** — Two-column layout with drop cap, pull quote, technical interests
+3. **Skills** — Categorized technical skills with proficiency indicators
+4. **Experience** — Alternating timeline with glassmorphism cards
+5. **Projects** — Editorial project cards with hover overlays
+6. **VitaVerse** — Startup concept spotlight with features, tech stack, roadmap
+7. **Education** — Academic timeline with focus areas and certifications
+8. **Career Interests** — Target role areas with opportunity indicators
+9. **Contact** — Two-column layout with form and contact information
+10. **Footer** — 4-column grid with navigation, links, and theme toggle
 
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-
-### Installation
+## Development
 
 ```bash
-# Clone the repository
-git clone <repository-url>
-cd kavya-portfolio
-
 # Install dependencies
 npm install
 
-# Start development server
+# Run development server
 npm run dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Build for Production
-
-```bash
-# Build the application
+# Build for production
 npm run build
 
-# Start production server
+# Preview production build
 npm run start
 ```
 
-## 📁 Project Structure
+## Deployment
 
-```
-src/
-├── app/
-│   ├── globals.css       # Global styles & design tokens
-│   ├── layout.tsx        # Root layout with metadata
-│   └── page.tsx          # Main page composing all sections
-├── components/
-│   ├── ui/               # Reusable UI components
-│   │   ├── button.tsx
-│   │   ├── card.tsx
-│   │   ├── input.tsx
-│   │   └── textarea.tsx
-│   ├── Navigation.tsx    # Responsive navigation with theme toggle
-│   ├── Hero.tsx          # Hero section with CTAs
-│   ├── About.tsx         # About me with interests & facts
-│   ├── Skills.tsx        # Technical & soft skills
-│   ├── Experience.tsx    # Timeline-based experience
-│   ├── Projects.tsx      # Featured projects showcase
-│   ├── VitaVerse.tsx     # Startup concept detail
-│   ├── Education.tsx     # Academic timeline
-│   ├── CareerInterests.tsx # Career focus areas
-│   ├── Contact.tsx       # Contact form & info
-│   └── Footer.tsx        # Site footer
-├── lib/
-│   ├── data.ts           # Portfolio content data
-│   └── utils.ts          # Utility functions
-public/
-├── cv.pdf                # Resume download
-├── projects/             # Project preview images
-├── robots.txt
-└── sitemap.xml
-```
+Configured for static export with `output: 'export'` and `trailingSlash: true`.
+Deploy to Vercel, Cloudflare Pages, Netlify, or any static hosting.
 
-## ♿ Accessibility Features
+## License
 
-- Semantic HTML5 structure
-- ARIA labels and roles
-- Keyboard navigation support
-- Focus visible states
-- Color contrast ratios (WCAG AA)
-- Reduced motion support
-- Screen reader friendly
-- Alt text for all images
-
-## 🌙 Dark Mode
-
-- System preference detection
-- Manual toggle with persistence
-- Smooth transitions
-- All components support both themes
-
-## 📱 Responsive Design
-
-- Mobile-first approach
-- Fluid typography with `clamp()`
-- Flexible grid layouts
-- Touch-friendly targets (44px minimum)
-- Optimized for 375px → 1536px+
-
-## 🔧 Customization
-
-### Content
-Edit `src/lib/data.ts` to update:
-- Personal information
-- About section content
-- Skills and proficiency levels
-- Experience entries
-- Projects
-- Education history
-- Career interests
-
-### Styling
-Modify `tailwind.config.ts` for:
-- Color palette
-- Typography scale
-- Spacing system
-- Animation durations
-- Border radius scale
-
-### Fonts
-Update `src/app/layout.tsx` to change font families.
-
-## 📄 License
-
-This project is for personal portfolio use. Feel free to use as inspiration for your own portfolio.
-
-## 🤝 Contact
-
-- **Email**: kavyasshah2006@gmail.com
-- **LinkedIn**: [linkedin.com/in/kavyashah](https://linkedin.com/in/kavyashah)
-- **GitHub**: [github.com/kavyashah](https://github.com/kavyashah)
-- **Location**: Venice, Italy
+MIT License - feel free to use as inspiration for your own portfolio.
