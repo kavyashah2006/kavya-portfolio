@@ -11,23 +11,17 @@ interface ThemeContextType {
   setTheme: (theme: Theme) => void
 }
 
-const defaultContext: ThemeContextType = {
-  theme: 'dark',
-  toggleTheme: () => {},
-  setTheme: () => {},
-}
-
-const ThemeContext = createContext<ThemeContextType>(defaultContext)
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('dark')
+  const [theme, setThemeState] = useState<Theme>('light')
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    const savedTheme = localStorage.getItem('theme') as Theme | null
+    const stored = localStorage.getItem('theme') as Theme | null
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light')
+    const initialTheme = stored || (prefersDark ? 'dark' : 'light')
     setThemeState(initialTheme)
     document.documentElement.classList.toggle('dark', initialTheme === 'dark')
   }, [])
@@ -39,17 +33,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }
 
   const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark'
-    setTheme(newTheme)
+    setTheme(theme === 'light' ? 'dark' : 'light')
   }
 
-  // Return default context during SSR, real context after mount
-  const contextValue = mounted
-    ? { theme, toggleTheme, setTheme }
-    : defaultContext
+  if (!mounted) {
+    return <>{children}</>
+  }
 
   return (
-    <ThemeContext.Provider value={contextValue}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   )

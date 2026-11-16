@@ -1,5 +1,3 @@
-'use client'
-
 import { personalInfo, education, experience } from '@/lib/data'
 
 export function StructuredData() {
@@ -13,11 +11,17 @@ export function StructuredData() {
       name: personalInfo.university,
     },
     url: 'https://kavyashah.dev',
+    email: personalInfo.email,
+    telephone: personalInfo.phone,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Venice',
+      addressCountry: 'IT',
+    },
     sameAs: [
       personalInfo.linkedin,
       personalInfo.github,
     ],
-    email: personalInfo.email,
     knowsAbout: [
       'Data Science',
       'Artificial Intelligence',
@@ -26,48 +30,58 @@ export function StructuredData() {
       'SQL',
       'Data Analysis',
       'Healthcare Technology',
+      'Database Management',
     ],
-    alumniOf: {
-      '@type': 'CollegeOrUniversity',
-      name: "Ca' Foscari University of Venice",
-    },
+    description: personalInfo.tagline,
   }
 
   const educationSchema = education.map((edu) => ({
+    '@context': 'https://schema.org',
     '@type': 'EducationalOccupationalCredential',
-    educationalLevel: edu.degree,
+    credentialCategory: edu.degree,
     recognizedBy: {
-      '@type': 'CollegeOrUniversity',
+      '@type': 'Organization',
       name: edu.institution,
     },
     dateCreated: edu.endDate || new Date().toISOString().split('T')[0],
+    description: edu.description,
   }))
 
   const experienceSchema = experience.map((exp) => ({
+    '@context': 'https://schema.org',
     '@type': 'WorkExperience',
-    organization: {
+    title: exp.role,
+    employer: {
       '@type': 'Organization',
       name: exp.company,
     },
-    jobTitle: exp.role,
+    location: exp.location,
     startDate: exp.startDate,
     endDate: exp.endDate || undefined,
     description: exp.responsibilities.join('; '),
+    skills: exp.technologies,
   }))
 
-  const combinedSchema = {
-    '@context': 'https://schema.org',
-    '@graph': [
-      personSchema,
-      ...educationSchema,
-      ...experienceSchema,
-    ],
-  }
-
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      {educationSchema.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+      {experienceSchema.map((schema, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+    </>
   )
 }
