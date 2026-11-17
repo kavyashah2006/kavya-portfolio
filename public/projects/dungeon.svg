@@ -1,0 +1,56 @@
+<svg width="800" height="450" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#1C1917"/>
+  <g fill="#E7E5E4">
+    <!-- Procedural dungeon rooms -->
+    <g fill="none" stroke="#292524" stroke-width="2">
+      <rect x="120" y="80" width="150" height="120"/>
+      <rect x="330" y="80" width="180" height="100"/>
+      <rect x="580" y="80" width="130" height="120"/>
+      <rect x="100" y="250" width="180" height="100"/>
+      <rect x="330" y="230" width="150" height="130"/>
+      <rect x="550" y="250" width="160" height="110"/>
+    </g>
+    <!-- Corridors connecting rooms -->
+    <g stroke="#292524" stroke-width="8" fill="none">
+      <path d="M 270 140 H 330"/>
+      <path d="M 510 140 H 580"/>
+      <path d="M 280 300 H 330"/>
+      <path d="M 480 300 H 550"/>
+      <path d="M 200 200 V 250"/>
+      <path d="M 420 180 V 230"/>
+      <path d="M 640 200 V 250"/>
+    </g>
+    <!-- Room doors -->
+    <g fill="#A3E635">
+      <rect x="265" y="135" width="10" height="10"/>
+      <rect x="505" y="135" width="10" height="10"/>
+      <rect x="275" y="295" width="10" height="10"/>
+      <rect x="475" y="295" width="10" height="10"/>
+      <rect x="195" y="245" width="10" height="10"/>
+      <rect x="415" y="225" width="10" height="10"/>
+      <rect x="635" y="245" width="10" height="10"/>
+    </g>
+    <!-- Player -->
+    <circle cx="195" cy="140" r="12" fill="#60A5FA"/>
+    <circle cx="195" cy="140" r="6" fill="#1C1917"/>
+    <!-- Enemies -->
+    <g fill="#EF4444">
+      <circle cx="420" cy="130" r="10"/>
+      <circle cx="640" cy="140" r="10"/>
+      <circle cx="420" cy="295" r="10"/>
+    </g>
+    <!-- Treasure -->
+    <g fill="#F59E0B">
+      <polygon points="400,350 390,370 370,370 385,380 380,400 400,390 420,400 415,380 430,370 410,370"/>
+      <polygon points="660,305 650,325 630,325 645,335 640,355 660,345 680,355 675,335 690,325 670,325"/>
+    </g>
+    <!-- Health potions -->
+    <g fill="#F472B6">
+      <rect x="150" y="120" width="8" height="12" rx="2"/>
+      <rect x="152" y="120" width="4" height="8" fill="#BE185D" rx="1"/>
+      <rect x="580" y="280" width="8" height="12" rx="2"/>
+      <rect x="582" y="280" width="4" height="8" fill="#BE185D" rx="1"/>
+    </g>
+  </g>
+  <text x="400" y="410" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#78716C">Procedural Dungeon Adventure • C</text>
+</svg>
