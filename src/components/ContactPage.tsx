@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { Mail, Linkedin, Github, MapPin, Send, CheckCircle, Loader2, AlertCircle, MessageSquare, Clock, Globe } from 'lucide-react'
+import { Mail, Linkedin, Github, MapPin, Send, CheckCircle, Loader2, AlertCircle, MessageSquare, Clock, Globe, Shield, Award, Briefcase, Brain, HeartPulse, Lightbulb, Download } from 'lucide-react'
 import { personalInfo } from '@/lib/data'
 
 const sectionVariants = {
@@ -46,7 +46,7 @@ export function ContactPage() {
     try {
       // Simulate form submission
       await new Promise(resolve => setTimeout(resolve, 1500))
-      
+
       // In production, you'd integrate with a service like Formspree, EmailJS, or a custom API
       // For now, we'll simulate success
       setStatus('success')
