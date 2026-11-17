@@ -122,13 +122,12 @@ export function AboutPage() {
                 <p className="text-sm text-muted-foreground uppercase tracking-wider font-heading mt-1">Languages Spoken</p>
               </div>
             </motion.div>
-          </motion.div>
-        </div>
 
-        {/* Decorative orbs */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+            {/* Decorative orbs */}
+            <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+              <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+              <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+            </div>
         </div>
       </section>
 
