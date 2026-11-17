@@ -285,7 +285,7 @@ const complexityColors = {
 }
 
 interface ExperimentModalProps {
-  experiment: typeof labExperiments[0]
+  experiment: typeof labExperiments[0] | null
   isOpen: boolean
   onClose: () => void
   onNavigate: (direction: 'prev' | 'next') => void
@@ -296,6 +296,9 @@ interface ExperimentModalProps {
 function ExperimentModal({ experiment, isOpen, onClose, onNavigate, hasPrev, hasNext }: ExperimentModalProps) {
   const prefersReducedMotion = useReducedMotion()
   const [activeStep, setActiveStep] = React.useState(0)
+
+  // Guard against null experiment during exit animation - must be before any property access
+  if (!isOpen || !experiment) return null
 
   const StatusIcon = statusColors[experiment.status as keyof typeof statusColors]?.icon || FlaskConical
   const colorScheme = categoryColors[experiment.color as keyof typeof categoryColors] || categoryColors.primary
@@ -318,8 +321,6 @@ function ExperimentModal({ experiment, isOpen, onClose, onNavigate, hasPrev, has
       document.body.style.overflow = ''
     }
   }, [isOpen, hasPrev, hasNext, onClose, onNavigate])
-
-  if (!isOpen) return null
 
   return (
     <AnimatePresence>
@@ -806,7 +807,7 @@ export function Lab() {
                   >
                     {/* Status badge */}
                     <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium font-heading flex items-center gap-1.5 ${statusScheme.bg} ${statusScheme.text} ${statusScheme.border} border`}>
+                      <div className={`px-3 py-1 rounded-full text-xs font-medium font-heading ${statusScheme.bg} ${statusScheme.text} ${statusScheme.border} border`}>
                         <StatusIcon className="h-3 w-3" aria-hidden="true" />
                         {experiment.status}
                       </div>
@@ -1085,7 +1086,7 @@ export function Lab() {
 
       {/* Experiment Modal */}
       <ExperimentModal
-        experiment={openExperiment!}
+        experiment={openExperiment}
         isOpen={!!openExperiment}
         onClose={handleCloseModal}
         onNavigate={handleNavigate}
