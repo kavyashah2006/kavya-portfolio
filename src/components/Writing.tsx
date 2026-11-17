@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { BookOpen, FileText, Calendar, Tag, ArrowRight, ExternalLink, Github, ChevronLeft, ChevronRight, X, Search, LayoutGrid, List, Eye, Clock, Share2, Download, ArrowUpRight, ChevronsLeft, ChevronsRight, Star, Clipboard, HeartPulse, Activity, Database, Brain, Rocket, Code } from 'lucide-react'
+import { BookOpen, FileText, Calendar, Tag, ArrowRight, ExternalLink, Github, ChevronLeft, ChevronRight, X, Search, LayoutGrid, List, Eye, Clock, Share2, Download, ArrowUpRight, ChevronsLeft, ChevronsRight, Star, Clipboard, HeartPulse, Activity, Database, Brain, Rocket, Code, Zap } from 'lucide-react'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 // Writing/Articles data - derived from existing projects and content
@@ -121,19 +121,278 @@ const writingPieces = [
   },
 ]
 
+const statusColors: Record<string, { bg: string; text: string; border: string }> = {
+  Published: { bg: 'bg-emerald-500/10', text: 'text-emerald-600', border: 'border-emerald-500/20' },
+  'In Progress': { bg: 'bg-primary/10', text: 'text-primary', border: 'border-primary/20' },
+  Draft: { bg: 'bg-amber-500/10', text: 'text-amber-600', border: 'border-amber-500/20' },
+}
+
 const categoryIcons: Record<string, React.ComponentType<{ className?: string }>> = {
   'Healthcare Technology': HeartPulse,
   'Data Visualization': Activity,
   'Data Engineering': Database,
   'Machine Learning': Brain,
+  'AI Ethics': Activity,
+  'C++ Programming': Code,
+  'Algorithms': Zap,
+  'Data Science': Database,
+  'AI': Brain,
   'Entrepreneurship': Rocket,
   'Software Engineering': Code,
 }
 
-const statusColors: Record<string, { bg: string; text: string; border: string }> = {
-  Published: { bg: 'bg-emerald-500/10', text: 'text-emerald-600', border: 'border-emerald-500/20' },
-  'In Progress': { bg: 'bg-primary/10', text: 'text-primary', border: 'border-primary/20' },
-  Draft: { bg: 'bg-amber-500/10', text: 'text-amber-600', border: 'border-amber-500/20' },
+interface ArticleModalProps {
+  article: typeof writingPieces[0] | null
+  isOpen: boolean
+  onClose: () => void
+  onNavigate: (direction: 'prev' | 'next') => void
+  hasPrev: boolean
+  hasNext: boolean
+}
+
+function ArticleModal({ article, isOpen, onClose, onNavigate, hasPrev, hasNext }: ArticleModalProps) {
+  const prefersReducedMotion = useReducedMotion()
+
+  // Guard against null article during exit animation
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case 'Healthcare Technology': return 'bg-accent/10 text-accent border-accent/20 border'
+      case 'Machine Learning': return 'bg-primary/10 text-primary border-primary/20 border'
+      case 'Data Visualization': return 'bg-secondary/10 text-secondary border-secondary/20 border'
+      case 'Entrepreneurship': return 'bg-accent/10 text-accent border-accent/20 border'
+      case 'Software Engineering': return 'bg-primary/10 text-primary border-primary/20 border'
+      default: return 'bg-muted-foreground/10 text-muted-foreground border-muted-foreground/20 border'
+    }
+  }
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'Published': return 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20 border'
+      case 'In Progress': return 'bg-primary/10 text-primary border-primary/20 border'
+      default: return 'bg-amber-500/10 text-amber-600 border-amber-500/20 border'
+    }
+  }
+
+  const Icon = article ? (categoryIcons[article.category as keyof typeof categoryIcons] || FileText) : FileText
+  const categoryColor = article ? getCategoryColor(article.category) : getCategoryColor('')
+  const statusColor = article ? getStatusColor(article.status) : getStatusColor('Draft')
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') onClose()
+    if (e.key === 'ArrowLeft' && hasPrev) onNavigate('prev')
+    if (e.key === 'ArrowRight' && hasNext) onNavigate('next')
+  }
+
+  React.useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = 'hidden'
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [isOpen, hasPrev, hasNext, onClose, onNavigate])
+
+  if (!isOpen || !article) return null
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-[600] flex items-center justify-center p-4 lg:p-8"
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, transition: { duration: 0.2 } },
+          exit: { opacity: 0, transition: { duration: 0.2 } },
+        }}
+        onClick={onClose}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="article-modal-title"
+      >
+        {/* Backdrop */}
+        <motion.div
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { duration: 0.2 } },
+            exit: { opacity: 0, transition: { duration: 0.2 } },
+          }}
+        />
+
+        {/* Modal Window */}
+        <motion.div
+          className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden glass-strong rounded-2xl"
+          variants={{
+            hidden: { opacity: 0, scale: 0.95, y: 20 },
+            visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
+            exit: { opacity: 0, scale: 0.95, y: 20, transition: { duration: 0.25, ease: [0.7, 0, 0.84, 0] } },
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Modal Header */}
+          <div className="flex items-start justify-between p-6 border-b border-border/30 sticky top-0 bg-background/95 backdrop-blur-sm z-10">
+            <div className="flex-1 pr-6">
+              <div className="flex items-center gap-3 mb-3">
+                <div
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center ${categoryColor}`}
+                  aria-hidden="true"
+                >
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <div>
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium font-heading ${statusColor}`}>
+                    {article.status}
+                  </span>
+                  {article.featured && (
+                    <span className="ml-2 flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/10 text-amber-600 border border-amber-200/50">
+                      <Star className="h-3 w-3" aria-hidden="true" />
+                      <span className="text-xs font-medium font-heading">Featured</span>
+                    </span>
+                  )}
+                </div>
+              </div>
+              <h2 id="article-modal-title" className="text-h1 lg:text-h2 font-heading font-semibold tracking-tight text-foreground mb-2">
+                {article.title}
+              </h2>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1">
+                  <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
+                  {new Date(article.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+                  {article.readTime}
+                </span>
+              </div>
+            </div>
+
+            {/* Close Button */}
+            <motion.button
+              onClick={onClose}
+              className="glass p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-all duration-fast flex-shrink-0"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label="Close article"
+            >
+              <X className="h-5 w-5" />
+            </motion.button>
+          </div>
+
+          {/* Modal Content */}
+          <div className="p-6 lg:p-8 overflow-y-auto max-h-[calc(90vh-80px)]">
+            <div className="prose prose-invert max-w-none text-body leading-relaxed text-muted-foreground">
+              <p className="mb-6 text-foreground">{article.excerpt}</p>
+              <div className="text-body leading-relaxed">{article.longDescription}</div>
+            </div>
+
+            {/* Tags */}
+            {article.tags.length > 0 && (
+              <div className="mt-8 pt-6 border-t border-border/30">
+                <h3 className="text-xs font-medium text-muted-foreground uppercase tracking-widest font-heading mb-4">Tags</h3>
+                <div className="flex flex-wrap gap-2">
+                  {article.tags.map((tag) => (
+                    <span key={tag} className="px-3 py-1.5 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm text-sm font-medium text-foreground">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Action Buttons */}
+            <div className="mt-8 pt-6 border-t border-border/30 flex flex-wrap gap-3">
+              {article.url && (
+                <motion.a
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary gap-2"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  aria-label="Read full article"
+                >
+                  <ExternalLink className="h-5 w-5" aria-hidden="true" />
+                  Read Full Article
+                </motion.a>
+              )}
+              {article.githubUrl && (
+                <motion.a
+                  href={article.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary gap-2"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  aria-label="View source on GitHub"
+                >
+                  <Github className="h-5 w-5" aria-hidden="true" />
+                  View Source
+                </motion.a>
+              )}
+              <motion.button
+                className="btn-outline gap-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => navigator.share?.({ title: article.title, text: article.excerpt, url: window.location.href })}
+              >
+                <Share2 className="h-5 w-5" aria-hidden="true" />
+                Share
+              </motion.button>
+              <motion.button
+                className="btn-outline gap-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  const text = `${article.title}\n${article.url || window.location.href}\n\n${article.excerpt}`
+                  navigator.clipboard.writeText(text)
+                }}
+              >
+                <Clipboard className="h-5 w-5" aria-hidden="true" />
+                Copy Link
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Modal Footer Navigation */}
+          {(hasPrev || hasNext) && (
+            <div className="flex items-center justify-between p-6 border-t border-border/30 bg-background/50 backdrop-blur-sm">
+              <motion.button
+                onClick={() => hasPrev && onNavigate('prev')}
+                disabled={!hasPrev}
+                className="btn-secondary gap-2 disabled:opacity-30 disabled:cursor-not-allowed"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                aria-label="Previous article"
+              >
+                <ChevronLeft className="h-4 w-4" />
+                Previous Article
+              </motion.button>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <kbd className="px-2 py-1 rounded bg-background border border-border/50 font-mono">←</kbd>
+                <span>Navigate</span>
+                <kbd className="px-2 py-1 rounded bg-background border border-border/50 font-mono">→</kbd>
+              </div>
+              <motion.button
+                onClick={() => hasNext && onNavigate('next')}
+                disabled={!hasNext}
+                className="btn-secondary gap-2 ml-auto disabled:opacity-30 disabled:cursor-not-allowed"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                aria-label="Next article"
+              >
+                Next Article
+                <ChevronRight className="h-4 w-4" />
+              </motion.button>
+            </div>
+          )}
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  )
 }
 
 const sectionVariants = {
