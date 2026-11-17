@@ -64,7 +64,7 @@ export function AboutPage() {
             viewport={{ once: true, margin: '-100px' }}
           >
             <motion.span
-              className="inline-block text-xs font-medium text-accent uppercase tracking-widest mb-6 font-heading"
+              className="inline-block text-xs font-medium text-accent uppercase tracking-widest mb-6 font-display"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -73,19 +73,21 @@ export function AboutPage() {
             </motion.span>
             <motion.h1
               id="about-hero-title"
-              className="text-h1 lg:text-display font-heading font-semibold tracking-tight text-foreground mb-8"
+              className="text-h1 lg:text-display font-display font-bold tracking-tight text-fg mb-8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
               Curious mind at the intersection of
               <br />
-              <span className="text-primary">data</span>,
-              <span className="text-accent">intelligence</span> &
-              <span className="text-secondary">technology</span>
+              <span className="gradient-text">data</span>,
+              <br />
+              <span className="gradient-text-secondary">intelligence</span> &
+              <br />
+              <span className="gradient-text">technology</span>
             </motion.h1>
             <motion.p
-              className="text-body-lg lg:text-h3 text-muted-foreground leading-relaxed max-w-3xl mx-auto"
+              className="text-body-lg lg:text-h3 text-fg-muted leading-relaxed max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
@@ -103,36 +105,37 @@ export function AboutPage() {
               transition={{ delay: 0.4 }}
             >
               <div className="text-center">
-                <p className="text-3xl lg:text-4xl font-heading font-bold text-foreground">2nd Year</p>
-                <p className="text-sm text-muted-foreground uppercase tracking-wider font-heading mt-1">BSc Data Science</p>
+                <p className="text-3xl lg:text-4xl font-display font-bold text-fg">2nd Year</p>
+                <p className="text-xs text-fg-muted uppercase tracking-widest font-display mt-1">BSc Data Science</p>
               </div>
               <div className="w-px h-12 bg-border/50 lg:h-16" aria-hidden="true" />
               <div className="text-center">
-                <p className="text-3xl lg:text-4xl font-heading font-bold text-foreground">Venice</p>
-                <p className="text-sm text-muted-foreground uppercase tracking-wider font-heading mt-1">Ca&apos; Foscari University</p>
+                <p className="text-3xl lg:text-4xl font-display font-bold text-fg">Venice</p>
+                <p className="text-xs text-fg-muted uppercase tracking-widest font-display mt-1">Ca&apos; Foscari University</p>
               </div>
               <div className="w-px h-12 bg-border/50 lg:h-16" aria-hidden="true" />
               <div className="text-center">
-                <p className="text-3xl lg:text-4xl font-heading font-bold text-foreground">200+ hrs</p>
-                <p className="text-sm text-muted-foreground uppercase tracking-wider font-heading mt-1">Data Analysis Internship</p>
+                <p className="text-3xl lg:text-4xl font-display font-bold text-fg">200+ hrs</p>
+                <p className="text-xs text-fg-muted uppercase tracking-widest font-display mt-1">Data Analysis Internship</p>
               </div>
               <div className="w-px h-12 bg-border/50 lg:h-16" aria-hidden="true" />
               <div className="text-center">
-                <p className="text-3xl lg:text-4xl font-heading font-bold text-foreground">4</p>
-                <p className="text-sm text-muted-foreground uppercase tracking-wider font-heading mt-1">Languages Spoken</p>
+                <p className="text-3xl lg:text-4xl font-display font-bold text-fg">4</p>
+                <p className="text-xs text-fg-muted uppercase tracking-widest font-display mt-1">Languages Spoken</p>
               </div>
             </motion.div>
+          </motion.div>
 
-            {/* Decorative orbs */}
-            <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-              <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-              <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
-            </div>
+          {/* Decorative orbs */}
+          <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-secondary/5 rounded-full blur-3xl" />
+          </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="section bg-muted/30" aria-labelledby="about-content-title">
+      <section className="section bg-bg-elevated/30" aria-labelledby="about-content-title">
         <div className="container-custom">
           <motion.div
             className="grid lg:grid-cols-12 gap-8 lg:gap-12"
@@ -145,26 +148,26 @@ export function AboutPage() {
             <div className="lg:col-span-7 space-y-8">
               {/* Introduction */}
               <motion.article
-                className="card-editorial space-y-6"
+                className="glass-xl space-y-6"
                 variants={itemVariants}
               >
                 <header>
-                  <h2 className="text-h2 font-heading font-medium tracking-tight text-foreground">
+                  <h2 className="text-h2 font-display font-medium tracking-tight text-fg">
                     Introduction
                   </h2>
                 </header>
-                <div className="drop-cap prose">
-                  <p className="text-body text-muted-foreground leading-relaxed mb-6">
+                <div className="prose space-y-6">
+                  <p className="text-body text-fg-muted leading-relaxed drop-cap">
                     {about.introduction}
                   </p>
-                  <p className="text-body text-muted-foreground leading-relaxed">
+                  <p className="text-body text-fg-muted leading-relaxed">
                     {about.approach}
                   </p>
                 </div>
                 {/* Pull quote */}
                 <blockquote className="pull-quote my-8 relative">
-                  <span className="absolute -top-8 left-0 text-6xl font-heading text-primary/20" aria-hidden="true">&ldquo;</span>
-                  <p className="relative text-h3 font-heading font-medium text-foreground leading-tight italic">
+                  <span className="absolute -top-8 left-0 text-6xl font-display text-accent/20" aria-hidden="true">&ldquo;</span>
+                  <p className="relative text-h3 font-display font-medium text-fg leading-tight italic">
                     &ldquo;Data is not just numbers&mdash;it&rsquo;s the language of understanding our world.
                     Intelligence is how we interpret it. Technology is how we scale that understanding.&rdquo;
                   </p>
@@ -173,14 +176,14 @@ export function AboutPage() {
 
               {/* Technical Interests - Enhanced cards */}
               <motion.article
-                className="card-editorial space-y-6"
+                className="glass-xl space-y-6"
                 variants={itemVariants}
               >
                 <header>
-                  <h2 className="text-h2 font-heading font-medium tracking-tight text-foreground">
+                  <h2 className="text-h2 font-display font-medium tracking-tight text-fg">
                     Technical Interests
                   </h2>
-                  <p className="text-body text-muted-foreground mt-2">
+                  <p className="text-body text-fg-muted mt-2">
                     Areas where curiosity meets capability
                   </p>
                 </header>
@@ -188,16 +191,15 @@ export function AboutPage() {
                   {about.interests.map((interest, index) => {
                     const Icon = interestIcons[interest as keyof typeof interestIcons] || Sparkles
                     const colorClasses = [
+                      { bg: 'bg-accent/10', text: 'text-accent', border: 'border-accent/20' },
+                      { bg: 'bg-accent-secondary/10', text: 'text-accent-secondary', border: 'border-accent-secondary/20' },
                       { bg: 'bg-primary/10', text: 'text-primary', border: 'border-primary/20' },
                       { bg: 'bg-accent/10', text: 'text-accent', border: 'border-accent/20' },
-                      { bg: 'bg-secondary/10', text: 'text-secondary', border: 'border-secondary/20' },
+                      { bg: 'bg-accent-secondary/10', text: 'text-accent-secondary', border: 'border-accent-secondary/20' },
                       { bg: 'bg-primary/10', text: 'text-primary', border: 'border-primary/20' },
                       { bg: 'bg-accent/10', text: 'text-accent', border: 'border-accent/20' },
-                      { bg: 'bg-secondary/10', text: 'text-secondary', border: 'border-secondary/20' },
-                      { bg: 'bg-primary/10', text: 'text-primary', border: 'border-primary/20' },
-                      { bg: 'bg-accent/10', text: 'text-accent', border: 'border-accent/20' },
-                      { bg: 'bg-secondary/10', text: 'text-secondary', border: 'border-secondary/20' },
-                    ][index % 9]
+                      { bg: 'bg-accent-secondary/10', text: 'text-accent-secondary', border: 'border-accent-secondary/20' },
+                    ][index % 8]
                     const description = interestDescriptions[interest as keyof typeof interestDescriptions] || ''
 
                     return (
@@ -215,10 +217,10 @@ export function AboutPage() {
                             <Icon className="h-6 w-6" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h3 className="text-body font-medium text-foreground font-heading">
+                            <h3 className="text-body font-medium text-fg font-display">
                               {interest}
                             </h3>
-                            <p className="text-sm text-muted-foreground mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-fast line-clamp-2">
+                            <p className="text-sm text-fg-muted mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-fast line-clamp-2">
                               {description}
                             </p>
                             <span className="inline-flex items-center gap-1 text-sm font-medium text-accent mt-2 opacity-0 group-hover:opacity-100 translate-x-1 group-hover:translate-x-0 transition-all duration-fast">
@@ -235,47 +237,47 @@ export function AboutPage() {
 
               {/* Career Ambitions */}
               <motion.article
-                className="card-editorial space-y-6"
+                className="glass-xl space-y-6"
                 variants={itemVariants}
               >
                 <header>
-                  <h2 className="text-h2 font-heading font-medium tracking-tight text-foreground">
+                  <h2 className="text-h2 font-display font-medium tracking-tight text-fg">
                     Career Ambitions
                   </h2>
                 </header>
                 <div className="prose">
-                  <p className="text-body text-muted-foreground leading-relaxed">
+                  <p className="text-body text-fg-muted leading-relaxed">
                     {about.ambitions}
                   </p>
                 </div>
                 {/* Ambition highlights */}
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-4">
                   {[
-                    { label: 'Data Science & Analytics', icon: BarChart, color: 'primary', description: 'Statistical modeling, visualization, and insight generation' },
-                    { label: 'AI & Machine Learning', icon: Brain, color: 'accent', description: 'Deep learning, NLP, and production ML systems' },
-                    { label: 'Healthcare Technology', icon: HeartPulse, color: 'secondary', description: 'Digital health, FHIR standards, and medical AI' },
-                    { label: 'Research & Innovation', icon: BookOpen, color: 'primary', description: 'Academic research, publications, and novel algorithms' },
-                    { label: 'Global Impact', icon: Globe, color: 'accent', description: 'International organizations, UN initiatives, and cross-border tech' },
-                    { label: 'Product Building', icon: Lightbulb, color: 'secondary', description: 'End-to-end product development and startup operations' },
+                    { label: 'Data Science & Analytics', icon: BarChart, color: 'accent', description: 'Statistical modeling, visualization, and insight generation' },
+                    { label: 'AI & Machine Learning', icon: Brain, color: 'accent-secondary', description: 'Deep learning, NLP, and production ML systems' },
+                    { label: 'Healthcare Technology', icon: HeartPulse, color: 'primary', description: 'Digital health, FHIR standards, and medical AI' },
+                    { label: 'Research & Innovation', icon: BookOpen, color: 'accent', description: 'Academic research, publications, and novel algorithms' },
+                    { label: 'Global Impact', icon: Globe, color: 'accent-secondary', description: 'International organizations, UN initiatives, and cross-border tech' },
+                    { label: 'Product Building', icon: Lightbulb, color: 'primary', description: 'End-to-end product development and startup operations' },
                   ].map((item, index) => (
                     <motion.div
                       key={item.label}
-                      className="glass px-5 py-4 rounded-xl border border-border/50 group hover:border-accent/30 hover:shadow-xl transition-all duration-normal"
+                      className="glass p-5 rounded-xl border border-border/50 group hover:border-accent/30 hover:shadow-xl transition-all duration-normal"
                       variants={itemVariants}
                       style={{ transitionDelay: `${index * 60}ms` }}
                     >
                       <div className="flex items-start gap-3">
                         <div
-                          className={`flex-shrink-0 p-2.5 rounded-lg ${item.color === 'primary' ? 'bg-primary/10 text-primary' : item.color === 'accent' ? 'bg-accent/10 text-accent' : 'bg-secondary/10 text-secondary'}`}
+                          className={`flex-shrink-0 p-2.5 rounded-lg ${item.color === 'accent' ? 'bg-accent/10 text-accent' : item.color === 'accent-secondary' ? 'bg-accent-secondary/10 text-accent-secondary' : 'bg-primary/10 text-primary'}`}
                           aria-hidden="true"
                         >
                           <item.icon className="h-5 w-5" />
                         </div>
                         <div>
-                          <h3 className="text-sm font-medium text-foreground font-heading">
+                          <h3 className="text-sm font-medium text-fg font-display">
                             {item.label}
                           </h3>
-                          <p className="text-xs text-muted-foreground mt-1">{item.description}</p>
+                          <p className="text-xs text-fg-muted mt-1">{item.description}</p>
                         </div>
                       </div>
                     </motion.div>
@@ -285,14 +287,14 @@ export function AboutPage() {
 
               {/* Career Interests from data */}
               <motion.article
-                className="card-editorial space-y-6"
+                className="glass-xl space-y-6"
                 variants={itemVariants}
               >
                 <header>
-                  <h2 className="text-h2 font-heading font-medium tracking-tight text-foreground">
+                  <h2 className="text-h2 font-display font-medium tracking-tight text-fg">
                     Focus Areas
                   </h2>
-                  <p className="text-body text-muted-foreground mt-2">
+                  <p className="text-body text-fg-muted mt-2">
                     Deepening expertise in these domains
                   </p>
                 </header>
@@ -320,10 +322,10 @@ export function AboutPage() {
                             <Icon className="h-5 w-5" />
                           </div>
                           <div>
-                            <h3 className="text-sm font-medium text-foreground font-heading">
+                            <h3 className="text-sm font-medium text-fg font-display">
                               {interest.title}
                             </h3>
-                            <p className="text-xs text-muted-foreground mt-1">{interest.description}</p>
+                            <p className="text-xs text-fg-muted mt-1">{interest.description}</p>
                           </div>
                         </div>
                       </motion.div>
@@ -337,34 +339,34 @@ export function AboutPage() {
             <div className="lg:col-span-5 space-y-8">
               {/* Profile Card */}
               <motion.article
-                className="card-editorial space-y-6"
+                className="glass-xl space-y-6"
                 variants={itemVariants}
               >
                 <div className="text-center space-y-4">
                   <div className="relative w-28 h-28 mx-auto">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full blur-xl" aria-hidden="true" />
-                    <div className="relative w-full h-full rounded-full border-4 border-accent/30 bg-gradient-to-br from-background to-muted/50 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-accent-secondary/20 rounded-full blur-xl" aria-hidden="true" />
+                    <div className="relative w-full h-full rounded-full border-4 border-accent/30 bg-gradient-to-br from-bg to-bg-elevated/50 flex items-center justify-center">
                       <GraduationCap className="h-12 w-12 text-accent" aria-hidden="true" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-h3 font-heading font-semibold text-foreground">{personalInfo.name}</h3>
+                    <h3 className="text-h3 font-display font-semibold text-fg">{personalInfo.name}</h3>
                     <p className="text-body text-accent font-medium">{personalInfo.title}</p>
-                    <p className="text-sm text-muted-foreground">{personalInfo.university}</p>
+                    <p className="text-sm text-fg-muted">{personalInfo.university}</p>
                   </div>
                 </div>
               </motion.article>
 
               {/* Quick Facts */}
               <motion.article
-                className="card-editorial space-y-6"
+                className="glass-xl space-y-6"
                 variants={itemVariants}
               >
                 <header>
-                  <h3 className="text-h3 font-heading font-medium tracking-tight text-foreground">
+                  <h3 className="text-h3 font-display font-medium tracking-tight text-fg">
                     Quick Facts
                   </h3>
-                  <p className="text-body text-muted-foreground mt-2">
+                  <p className="text-body text-fg-muted mt-2">
                     At a glance
                   </p>
                 </header>
@@ -381,15 +383,15 @@ export function AboutPage() {
                   ].map((fact, index) => (
                     <motion.div
                       key={fact.label}
-                      className="p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm group hover:border-accent/30 transition-all duration-normal"
+                      className="p-4 rounded-xl border border-border/50 bg-bg-elevated/50 backdrop-blur-sm group hover:border-accent/30 transition-all duration-normal"
                       variants={itemVariants}
                       style={{ transitionDelay: `${index * 50}ms` }}
                     >
-                      <dt className="text-xs font-medium text-muted-foreground uppercase tracking-widest font-heading mb-2 flex items-center gap-2">
+                      <dt className="text-xs font-medium text-fg-muted uppercase tracking-widest font-display mb-2 flex items-center gap-2">
                         <fact.icon className="h-4 w-4" aria-hidden="true" />
                         {fact.label}
                       </dt>
-                      <dd className="text-body font-medium text-foreground ml-6">
+                      <dd className="text-body font-medium text-fg ml-6">
                         {fact.value}
                       </dd>
                     </motion.div>
@@ -399,11 +401,11 @@ export function AboutPage() {
 
               {/* Languages */}
               <motion.article
-                className="card-editorial space-y-6"
+                className="glass-xl space-y-6"
                 variants={itemVariants}
               >
                 <header>
-                  <h3 className="text-h3 font-heading font-medium tracking-tight text-foreground">
+                  <h3 className="text-h3 font-display font-medium tracking-tight text-fg">
                     Languages
                   </h3>
                 </header>
@@ -411,10 +413,10 @@ export function AboutPage() {
                   {(languages || []).map((lang) => (
                     <motion.li
                       key={lang.language}
-                      className="flex items-center justify-between p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm group hover:border-accent/30 transition-all duration-normal"
+                      className="flex items-center justify-between p-4 rounded-xl border border-border/50 bg-bg-elevated/50 backdrop-blur-sm group hover:border-accent/30 transition-all duration-normal"
                       variants={itemVariants}
                     >
-                      <span className="text-body font-medium text-foreground">
+                      <span className="text-body font-medium text-fg">
                         {lang.language}
                       </span>
                       <span className="text-sm font-medium text-accent bg-accent/10 px-3 py-1.5 rounded-full">
@@ -427,11 +429,11 @@ export function AboutPage() {
 
               {/* Certifications */}
               <motion.article
-                className="card-editorial space-y-6"
+                className="glass-xl space-y-6"
                 variants={itemVariants}
               >
                 <header>
-                  <h3 className="text-h3 font-heading font-medium tracking-tight text-foreground">
+                  <h3 className="text-h3 font-display font-medium tracking-tight text-fg">
                     Certifications
                   </h3>
                 </header>
@@ -439,7 +441,7 @@ export function AboutPage() {
                   {(certifications || []).map((cert) => (
                     <motion.li
                       key={cert.id}
-                      className="p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm group hover:border-accent/30 transition-all duration-normal"
+                      className="p-4 rounded-xl border border-border/50 bg-bg-elevated/50 backdrop-blur-sm group hover:border-accent/30 transition-all duration-normal"
                       variants={itemVariants}
                     >
                       <div className="flex items-start gap-3">
@@ -447,8 +449,8 @@ export function AboutPage() {
                           <Award className="h-5 w-5" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-sm font-medium text-foreground font-heading">{cert.name}</h4>
-                          <p className="text-xs text-muted-foreground mt-1">{cert.issuer} &middot; {new Date(cert.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</p>
+                          <h4 className="text-sm font-medium text-fg font-display">{cert.name}</h4>
+                          <p className="text-xs text-fg-muted mt-1">{cert.issuer} &middot; {new Date(cert.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</p>
                           <p className="text-xs text-accent mt-1 font-medium">{cert.level}</p>
                         </div>
                       </div>
@@ -459,11 +461,11 @@ export function AboutPage() {
 
               {/* Volunteering */}
               <motion.article
-                className="card-editorial space-y-6"
+                className="glass-xl space-y-6"
                 variants={itemVariants}
               >
                 <header>
-                  <h3 className="text-h3 font-heading font-medium tracking-tight text-foreground">
+                  <h3 className="text-h3 font-display font-medium tracking-tight text-fg">
                     Volunteering
                   </h3>
                 </header>
@@ -471,12 +473,12 @@ export function AboutPage() {
                   {(volunteering || []).map((vol) => (
                     <motion.li
                       key={vol.organization}
-                      className="p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm group hover:border-accent/30 transition-all duration-normal"
+                      className="p-4 rounded-xl border border-border/50 bg-bg-elevated/50 backdrop-blur-sm group hover:border-accent/30 transition-all duration-normal"
                       variants={itemVariants}
                     >
-                      <h4 className="text-sm font-medium text-foreground font-heading">{vol.role} at {vol.organization}</h4>
-                      <p className="text-xs text-muted-foreground mt-1">{vol.location} &middot; {new Date(vol.startDate).getFullYear()}&ndash;{vol.endDate ? new Date(vol.endDate).getFullYear() : 'Present'}</p>
-                      <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{vol.description}</p>
+                      <h4 className="text-sm font-medium text-fg font-display">{vol.role} at {vol.organization}</h4>
+                      <p className="text-xs text-fg-muted mt-1">{vol.location} &middot; {new Date(vol.startDate).getFullYear()}&ndash;{vol.endDate ? new Date(vol.endDate).getFullYear() : 'Present'}</p>
+                      <p className="text-sm text-fg-muted mt-2 line-clamp-2">{vol.description}</p>
                     </motion.li>
                   ))}
                 </ul>
@@ -484,14 +486,14 @@ export function AboutPage() {
 
               {/* Hobbies & Interests */}
               <motion.article
-                className="card-editorial space-y-6"
+                className="glass-xl space-y-6"
                 variants={itemVariants}
               >
                 <header>
-                  <h3 className="text-h3 font-heading font-medium tracking-tight text-foreground">
+                  <h3 className="text-h3 font-display font-medium tracking-tight text-fg">
                     Beyond Code
                   </h3>
-                  <p className="text-body text-muted-foreground mt-2">
+                  <p className="text-body text-fg-muted mt-2">
                     What fuels the curiosity
                   </p>
                 </header>
@@ -499,7 +501,7 @@ export function AboutPage() {
                   {(hobbies || []).map((hobby) => (
                     <motion.span
                       key={hobby}
-                      className="px-4 py-2 rounded-full border border-border/50 bg-background/50 backdrop-blur-sm text-body text-foreground font-medium font-heading hover:border-accent/50 hover:bg-accent/10 transition-all duration-fast cursor-default"
+                      className="px-4 py-2 rounded-full border border-border/50 bg-bg-elevated/50 backdrop-blur-sm text-body text-fg font-medium font-display hover:border-accent/50 hover:bg-accent/10 transition-all duration-fast cursor-default"
                       variants={itemVariants}
                     >
                       {hobby}
@@ -510,11 +512,11 @@ export function AboutPage() {
 
               {/* Contact Links */}
               <motion.article
-                className="card-editorial space-y-6"
+                className="glass-xl space-y-6"
                 variants={itemVariants}
               >
                 <header>
-                  <h3 className="text-h3 font-heading font-medium tracking-tight text-foreground">
+                  <h3 className="text-h3 font-display font-medium tracking-tight text-fg">
                     Connect
                   </h3>
                 </header>
@@ -531,14 +533,14 @@ export function AboutPage() {
                       target={contact.external ? '_blank' : undefined}
                       rel={contact.external ? 'noopener noreferrer' : undefined}
                       download={contact.download}
-                      className="flex items-center gap-3 p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm group hover:border-accent/30 hover:bg-accent/5 transition-all duration-normal"
+                      className="flex items-center gap-3 p-4 rounded-xl border border-border/50 bg-bg-elevated/50 backdrop-blur-sm group hover:border-accent/30 hover:bg-accent/5 transition-all duration-normal"
                     >
                       <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-accent/10 text-accent flex items-center justify-center group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-fast" aria-hidden="true">
                         <contact.icon className="h-5 w-5" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{contact.label}</p>
-                        <p className="text-sm text-foreground truncate group-hover:text-accent transition-colors">{contact.value}</p>
+                        <p className="text-xs font-medium text-fg-muted uppercase tracking-wider">{contact.label}</p>
+                        <p className="text-sm text-fg truncate group-hover:text-accent transition-colors">{contact.value}</p>
                       </div>
                       <span className="text-accent opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true">&rarr;</span>
                     </a>
