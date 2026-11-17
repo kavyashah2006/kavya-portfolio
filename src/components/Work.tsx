@@ -68,7 +68,7 @@ const overlayVariants = {
 }
 
 interface ProjectModalProps {
-  project: typeof projects[0]
+  project: typeof projects[0] | null
   isOpen: boolean
   onClose: () => void
   onNavigate: (direction: 'prev' | 'next') => void
@@ -79,6 +79,9 @@ interface ProjectModalProps {
 function ProjectModal({ project, isOpen, onClose, onNavigate, hasPrev, hasNext }: ProjectModalProps) {
   const prefersReducedMotion = useReducedMotion()
   const [activeImageIndex, setActiveImageIndex] = React.useState(0)
+
+  // Early return if modal is closed or project is null - prevents null access in useMemo
+  if (!isOpen || !project) return null
 
   // Generate placeholder images for the gallery based on project
   const projectImages = React.useMemo(() => {
@@ -791,7 +794,7 @@ export function Work() {
 
       {/* Project Modal */}
       <ProjectModal
-        project={openProject!}
+        project={openProject}
         isOpen={!!openProject}
         onClose={handleCloseModal}
         onNavigate={handleNavigate}
