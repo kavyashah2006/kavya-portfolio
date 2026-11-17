@@ -3,8 +3,10 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
-import { Download, Linkedin, Github, Mail, ArrowRight, Sparkles, Brain, Code } from 'lucide-react'
+import { Download, Linkedin, Github, Mail, ArrowRight, Brain, Code, Sparkles, HeartPulse } from 'lucide-react'
 import { personalInfo } from '@/lib/data'
+import { AnimatedOrbs } from '@/components/AnimatedOrbs'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 export function Hero() {
   const scrollToSection = (href: string) => {
@@ -24,6 +26,8 @@ export function Hero() {
     link.click()
     document.body.removeChild(link)
   }
+
+  const prefersReducedMotion = useReducedMotion()
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -60,6 +64,12 @@ export function Hero() {
     },
   }
 
+  const focusAreas = [
+    { icon: Brain, label: 'AI & Machine Learning', color: 'accent' },
+    { icon: Code, label: 'Data Science & Analytics', color: 'accent' },
+    { icon: HeartPulse, label: 'Healthcare Technology', color: 'accent' },
+    { icon: Sparkles, label: 'Building VitaVerse', color: 'accent' },
+  ]
 
   return (
     <section
@@ -67,81 +77,42 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center pt-16 lg:pt-20 overflow-hidden"
       aria-labelledby="hero-title"
     >
-      {/* Background - Layered depth with glassmorphism blobs */}
-      <div className="absolute inset-0 -z-10" aria-hidden="true">
-        {/* Base gradient mesh */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted" />
+      {/* Background - Animated orbs */}
+      <AnimatedOrbs />
 
-        {/* Floating orbs - primary */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl"
-          style={{ background: 'var(--color-primary)', opacity: 0.08 }}
-          animate={{ scale: [1, 1.15, 1], opacity: [0.06, 0.1, 0.06] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-
-        {/* Floating orbs - secondary */}
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl"
-          style={{ background: 'var(--color-secondary)', opacity: 0.06 }}
-          animate={{ scale: [1, 1.1, 1], opacity: [0.04, 0.08, 0.04] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        />
-
-        {/* Floating orbs - accent */}
-        <motion.div
-          className="absolute top-1/3 right-1/6 w-64 h-64 rounded-full blur-3xl"
-          style={{ background: 'var(--color-accent)', opacity: 0.05 }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.03, 0.07, 0.03] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        />
-
-        {/* Editorial grid pattern - subtle */}
-        <div
-          className="absolute inset-0 opacity-20"
-          aria-hidden="true"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cpath stroke='currentColor' strokeWidth='0.5' d='M0 0h80v80H0zM40 0v80M0 40h80'/%3E%3C/g%3E%3C/svg%3E")`,
-            backgroundSize: '80px 80px',
-            color: 'var(--color-border)',
-          }}
-        />
-
-        {/* Central ring - subtle */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] border border-border/30 rounded-full" />
-      </div>
-
-      {/* Floating decorative elements with icons */}
-      <div className="absolute inset-0 -z-10" aria-hidden="true">
-        <motion.div
-          className="absolute top-20 left-10 glass px-3 py-2 rounded-lg"
-          variants={floatVariants}
-          style={{ transitionDelay: '0ms' }}
-        >
-          <Sparkles className="h-4 w-4 text-primary" />
-        </motion.div>
-        <motion.div
-          className="absolute top-40 right-12 glass px-3 py-2 rounded-lg"
-          variants={floatVariants}
-          style={{ transitionDelay: '1000ms' }}
-        >
-          <Brain className="h-4 w-4 text-accent" />
-        </motion.div>
-        <motion.div
-          className="absolute bottom-40 left-14 glass px-3 py-2 rounded-lg"
-          variants={floatVariants}
-          style={{ transitionDelay: '2000ms' }}
-        >
-          <Code className="h-4 w-4 text-secondary" />
-        </motion.div>
-        <motion.div
-          className="absolute bottom-20 right-16 glass px-3 py-2 rounded-lg"
-          variants={floatVariants}
-          style={{ transitionDelay: '3000ms' }}
-        >
-          <Sparkles className="h-4 w-4 text-primary" />
-        </motion.div>
-      </div>
+      {/* Floating decorative elements with icons - reduced motion aware */}
+      {!prefersReducedMotion && (
+        <div className="absolute inset-0 -z-10" aria-hidden="true">
+          <motion.div
+            className="absolute top-20 left-10 glass px-3 py-2 rounded-lg"
+            variants={floatVariants}
+            style={{ transitionDelay: '0ms' }}
+          >
+            <Sparkles className="h-4 w-4 text-accent" />
+          </motion.div>
+          <motion.div
+            className="absolute top-40 right-12 glass px-3 py-2 rounded-lg"
+            variants={floatVariants}
+            style={{ transitionDelay: '1000ms' }}
+          >
+            <Brain className="h-4 w-4 text-accent" />
+          </motion.div>
+          <motion.div
+            className="absolute bottom-40 left-14 glass px-3 py-2 rounded-lg"
+            variants={floatVariants}
+            style={{ transitionDelay: '2000ms' }}
+          >
+            <Code className="h-4 w-4 text-accent" />
+          </motion.div>
+          <motion.div
+            className="absolute bottom-20 right-16 glass px-3 py-2 rounded-lg"
+            variants={floatVariants}
+            style={{ transitionDelay: '3000ms' }}
+          >
+            <Sparkles className="h-4 w-4 text-accent" />
+          </motion.div>
+        </div>
+      )}
 
       <div className="container-custom relative z-10">
         <motion.div
@@ -158,8 +129,8 @@ export function Hero() {
           >
             <motion.span
               className="w-2 h-2 rounded-full"
-              style={{ background: 'var(--color-accent)' }}
-              animate={{ scale: [1, 1.3, 1] }}
+              style={{ background: 'var(--accent)' }}
+              animate={prefersReducedMotion ? {} : { scale: [1, 1.3, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
               aria-hidden="true"
             />
@@ -190,7 +161,7 @@ export function Hero() {
             className="text-h3 font-body font-normal text-foreground/85 mb-8 max-w-2xl text-balance leading-relaxed"
             variants={itemVariants}
           >
-            Exploring the intersection of <span className="font-medium text-foreground">Data</span>, <span className="font-medium text-primary">Intelligence</span> & <span className="font-medium text-accent">Technology</span>.
+            Exploring the intersection of <span className="font-medium text-foreground">Data</span>, <span className="font-medium text-accent">Intelligence</span> & <span className="font-medium text-accent">Technology</span>.
           </motion.p>
 
           {/* Description - Lead paragraph */}
@@ -199,20 +170,16 @@ export function Hero() {
             variants={itemVariants}
           >
             Second-year BSc Data Science student at Ca&apos; Foscari University of Venice.
-            Building expertise in Python, SQL, data analysis, and AI — with a focus on
+            Building expertise in Python, SQL, data analysis, and AI &mdash; with a focus on
             healthcare technology and digital innovation.
           </motion.p>
 
           {/* Key Focus Areas - Editorial cards */}
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-3xl"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12 max-w-4xl"
             variants={itemVariants}
           >
-            {[
-              { icon: Brain, label: 'AI & Machine Learning', color: 'primary' },
-              { icon: Code, label: 'Data Science & Analytics', color: 'accent' },
-              { icon: Sparkles, label: 'Healthcare Technology', color: 'secondary' },
-            ].map((item, index) => (
+            {focusAreas.map((item, index) => (
               <motion.div
                 key={item.label}
                 className="glass px-4 py-3 rounded-xl border border-border/50 group hover:border-accent/30 hover:shadow-xl transition-all duration-normal"
@@ -221,7 +188,7 @@ export function Hero() {
               >
                 <div className="flex items-center gap-3">
                   <div
-                    className={`p-2 rounded-lg ${item.color === 'primary' ? 'bg-primary/10 text-primary' : item.color === 'accent' ? 'bg-accent/10 text-accent' : 'bg-secondary/10 text-secondary'}`}
+                    className={`p-2 rounded-lg bg-accent/10 text-accent`}
                     aria-hidden="true"
                   >
                     <item.icon className="h-5 w-5" />
@@ -241,11 +208,11 @@ export function Hero() {
           >
             <Button
               size="lg"
-              onClick={() => scrollToSection('#projects')}
+              onClick={() => scrollToSection('#work')}
               className="group btn-primary px-8 py-3.5"
             >
               <span className="flex items-center gap-2">
-                Explore My Work
+                View My Work
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </span>
             </Button>
@@ -277,7 +244,7 @@ export function Hero() {
               href={personalInfo.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm px-2 py-1"
+              className="group flex items-center gap-2.5 text-sm font-medium text-muted-foreground hover:text-accent transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm px-2 py-1"
               aria-label="LinkedIn profile"
             >
               <Linkedin className="h-5 w-5 transition-transform group-hover:scale-110" aria-hidden="true" />
@@ -287,7 +254,7 @@ export function Hero() {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm px-2 py-1"
+              className="group flex items-center gap-2.5 text-sm font-medium text-muted-foreground hover:text-accent transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm px-2 py-1"
               aria-label="GitHub profile"
             >
               <Github className="h-5 w-5 transition-transform group-hover:scale-110" aria-hidden="true" />
@@ -295,7 +262,7 @@ export function Hero() {
             </a>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="group flex items-center gap-2.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm px-2 py-1"
+              className="group flex items-center gap-2.5 text-sm font-medium text-muted-foreground hover:text-accent transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm px-2 py-1"
               aria-label="Email"
             >
               <Mail className="h-5 w-5 transition-transform group-hover:scale-110" aria-hidden="true" />
@@ -307,7 +274,7 @@ export function Hero() {
           <motion.div
             className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground/50"
             variants={itemVariants}
-            animate={{ y: [0, 12, 0] }}
+            animate={prefersReducedMotion ? {} : { y: [0, 12, 0] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
             style={{ transitionDelay: '2s' }}
             aria-hidden="true"
@@ -318,7 +285,7 @@ export function Hero() {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
-              animate={{ pathLength: [0, 1, 1] }}
+              animate={prefersReducedMotion ? {} : { pathLength: [0, 1, 1] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
             >
               <path
