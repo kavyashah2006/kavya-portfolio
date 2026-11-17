@@ -2,8 +2,7 @@
 
 import * as React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { BookOpen, FileText, Calendar, Tag, ArrowRight, ExternalLink, Github, ChevronLeft, ChevronRight, X, Search, LayoutGrid, List, Eye, Clock, Share2, Download, ArrowUpRight, ChevronsLeft, ChevronsRight } from 'lucide-react'
+import { BookOpen, FileText, Calendar, Tag, ArrowRight, ExternalLink, Github, ChevronLeft, ChevronRight, X, Search, LayoutGrid, List, Eye, Clock, Share2, Download, ArrowUpRight, ChevronsLeft, ChevronsRight, Star, Clipboard, HeartPulse, Activity, Database, Brain, Rocket, Code } from 'lucide-react'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 // Writing/Articles data - derived from existing projects and content
@@ -17,178 +16,125 @@ const writingPieces = [
     tags: ['Product Strategy', 'FHIR', 'AI/ML', 'Privacy', 'Next.js', 'Firebase', 'OpenAI'],
     date: '2026-01-15',
     readTime: '12 min',
+    featured: true,
     status: 'Published',
+    url: null,
     githubUrl: 'https://github.com/kavyashah/vitaverse',
-    externalUrl: null,
-    icon: BookOpen,
-    color: 'accent',
-    featured: true,
-    wordCount: 3200,
-    series: 'Digital Health',
-    part: 1,
-    totalParts: 3,
   },
   {
-    id: 'pacman-engine-writeup',
-    title: 'Pac-Man Engine in C++17: Object-Oriented Game Architecture',
-    excerpt: 'Deep dive into building a complete game engine with quad-tree spatial partitioning, XML serialization, and modern C++17 patterns — a university project retrospective.',
-    longDescription: 'A comprehensive retrospective on building a Pac-Man clone from scratch in C++17 as a university project. This article covers the complete architecture: entity-component system design, quad-tree spatial partitioning for efficient collision detection, XML-based level serialization, state machine implementation for ghost AI behaviors (chase, scatter, frightened, eaten), and modern C++17 patterns including smart pointers, structured bindings, and constexpr utilities. Includes performance benchmarks comparing quad-tree vs brute-force collision detection, and lessons learned about game loop architecture.',
-    category: 'C++ Programming',
-    tags: ['C++17', 'OOP', 'Game Dev', 'Data Structures', 'ECS', 'XML', 'AI'],
-    date: '2025-12-20',
-    readTime: '15 min',
-    status: 'Published',
-    githubUrl: null,
-    externalUrl: null,
-    icon: FileText,
-    color: 'primary',
-    featured: true,
-    wordCount: 4100,
-    series: 'Game Engine Dev',
-    part: 1,
-    totalParts: 2,
-  },
-  {
-    id: 'dungeon-procedural',
-    title: 'Procedural Dungeon Generation in C: Algorithms & Implementation',
-    excerpt: 'Exploring procedural content generation for a text-based adventure game — room placement, corridor tunneling, and recursive Padovan sequence for encounter balancing.',
-    longDescription: 'An in-depth exploration of procedural dungeon generation algorithms implemented in C for a roguelike text adventure. Covers binary space partitioning (BSP) for room layout, A* corridor tunneling with Manhattan heuristics, cellular automata for cave-like structures, and a novel application of the recursive Padovan sequence for balanced encounter distribution. Includes visualizations of each generation step, complexity analysis of each algorithm, and a discussion of seed-based reproducibility for save/load systems. The article also covers memory-efficient implementation techniques for constrained environments.',
-    category: 'Algorithms',
-    tags: ['C', 'Procedural Gen', 'Algorithms', 'Game Dev', 'BSP', 'A*', 'Padovan'],
-    date: '2025-11-10',
-    readTime: '10 min',
-    status: 'Published',
-    githubUrl: null,
-    externalUrl: null,
-    icon: FileText,
-    color: 'secondary',
-    featured: false,
-    wordCount: 2800,
-    series: 'Procedural Generation',
-    part: 1,
-    totalParts: 3,
-  },
-  {
-    id: 'data-cleaning-guide',
-    title: 'Practical Data Cleaning Patterns for Real-World Datasets',
-    excerpt: 'Lessons from 200+ hours of data analysis internships — handling missing values, outlier detection, schema validation, and reproducible cleaning pipelines in Python and SQL.',
-    longDescription: 'A practical guide distilled from hundreds of hours of real-world data analysis work. Covers systematic approaches to handling missing data (MCAR, MAR, MNAR classification with visualization), statistical outlier detection using IQR, Z-score, and isolation forests, schema validation with Great Expectations and custom SQL constraints, and building reproducible cleaning pipelines with dbt and Airflow. Includes code templates for common cleaning patterns, a decision tree for choosing imputation strategies, and anti-patterns to avoid. The article emphasizes pragmatic solutions over theoretical purity.',
-    category: 'Data Science',
-    tags: ['Python', 'SQL', 'Data Cleaning', 'Best Practices', 'Pandas', 'dbt', 'Great Expectations'],
-    date: '2026-07-01',
+    id: 'data-viz-principles',
+    title: 'Effective Data Visualization: Principles Over Tools',
+    excerpt: 'Why the best visualizations come from understanding perception, not mastering libraries. A practitioner\'s guide to choosing the right chart for the right question.',
+    longDescription: 'After building dozens of dashboards and visualizations, I\'ve learned that tool choice matters far less than understanding the fundamentals of visual perception and data storytelling. This piece covers the cognitive principles behind effective charts — preattentive attributes, Gestalt principles, color theory for data, and progressive disclosure patterns. I walk through real examples from my work, showing how the same dataset tells different stories depending on the visualization approach.',
+    category: 'Data Visualization',
+    tags: ['D3.js', 'Recharts', 'Perception', 'Cognitive Load', 'Dashboard Design'],
+    date: '2025-11-20',
     readTime: '8 min',
-    status: 'Draft',
-    githubUrl: null,
-    externalUrl: null,
-    icon: FileText,
-    color: 'accent',
-    featured: false,
-    wordCount: 2100,
-    series: 'Data Engineering',
-    part: 1,
-    totalParts: 4,
-  },
-  {
-    id: 'healthcare-ai-ethics',
-    title: 'Privacy-Preserving AI in Healthcare: Local-First ML Approaches',
-    excerpt: 'Examining federated learning, differential privacy, and on-device inference for sensitive health data — technical patterns for building trustworthy medical AI systems.',
-    longDescription: 'A technical deep-dive into privacy-preserving machine learning for healthcare applications. Covers federated learning with TensorFlow.js for on-device training, differential privacy mechanisms (Gaussian, Laplace) with privacy budget accounting, secure multi-party computation basics, and homomorphic encryption trade-offs. Includes implementation patterns for local-first ML architectures, model inversion attack defenses, and regulatory compliance considerations (HIPAA, GDPR). The article provides a decision framework for choosing the right privacy technique based on data sensitivity, model complexity, and deployment constraints.',
-    category: 'AI Ethics',
-    tags: ['Privacy', 'Federated Learning', 'Healthcare', 'TensorFlow.js', 'Differential Privacy', 'HIPAA'],
-    date: '2026-08-15',
-    readTime: '18 min',
-    status: 'In Progress',
-    githubUrl: null,
-    externalUrl: null,
-    icon: BookOpen,
-    color: 'primary',
     featured: true,
-    wordCount: 5200,
-    series: 'AI Safety',
-    part: 1,
-    totalParts: 2,
-  },
-  {
-    id: 'fhir-standards-deep-dive',
-    title: 'FHIR R4 for Developers: Building Interoperable Health Systems',
-    excerpt: 'A practical guide to HL7 FHIR resources, profiles, and RESTful APIs — with code examples for patient records, observations, medications, and consent management.',
-    longDescription: 'A developer-focused guide to HL7 FHIR R4, the standard for healthcare data interoperability. Covers core resources (Patient, Observation, MedicationRequest, Consent), profiling with StructureDefinitions, RESTful API patterns (search, bundles, transactions), SMART on FHIR authentication, and FHIRPath for clinical logic. Includes TypeScript examples using fhirclient, React hooks for FHIR data fetching, and a complete example of building a patient timeline view. Also covers validation with the FHIR validator, terminology services (LOINC, SNOMED CT, RxNorm), and common implementation pitfalls.',
-    category: 'Healthcare Technology',
-    tags: ['FHIR', 'HL7', 'Interoperability', 'Standards', 'TypeScript', 'SMART', 'FHIRPath'],
-    date: '2026-09-01',
-    readTime: '20 min',
-    status: 'Planned',
-    githubUrl: null,
-    externalUrl: null,
-    icon: FileText,
-    color: 'secondary',
-    featured: false,
-    wordCount: 0,
-    series: 'FHIR Development',
-    part: 1,
-    totalParts: 5,
-  },
-  {
-    id: 'cpp-modern-patterns',
-    title: 'Modern C++ Patterns: From C++11 to C++23',
-    excerpt: 'A curated collection of modern C++ patterns that transform how we write systems code — concepts, ranges, coroutines, modules, and deducing this.',
-    longDescription: 'A comprehensive tour of modern C++ features from C++11 through C++23 that fundamentally change systems programming. Covers concepts and constraints for template metaprogramming, ranges and views for algorithmic composition, coroutines for async/await patterns, modules for compilation speed, deducing this for CRTP elimination, std::expected for error handling, and std::mdspan for multi-dimensional arrays. Each pattern includes before/after code comparisons, compiler support tables, and performance implications. Written as a reference for C++ developers transitioning from legacy codebases.',
-    category: 'C++ Programming',
-    tags: ['C++20', 'C++23', 'Concepts', 'Ranges', 'Coroutines', 'Modules', 'Patterns'],
-    date: '2026-03-15',
-    readTime: '25 min',
     status: 'Published',
-    githubUrl: 'https://github.com/kavyashah/cpp-modern-patterns',
-    externalUrl: null,
-    icon: FileText,
-    color: 'primary',
-    featured: true,
-    wordCount: 6800,
-    series: 'Modern C++',
-    part: 1,
-    totalParts: 3,
+    url: 'https://kavyashah.dev/writing/data-viz-principles',
+    githubUrl: null,
   },
   {
-    id: 'ml-explainability-practices',
-    title: 'ML Model Explainability in Production: SHAP, LIME, and Beyond',
-    excerpt: 'Practical patterns for explaining model predictions in production systems — from global feature importance to local instance explanations with latency budgets.',
-    longDescription: 'A production-focused guide to machine learning model explainability. Covers SHAP values (TreeSHAP, KernelSHAP, DeepSHAP) with performance optimization techniques, LIME for local explanations, integrated gradients for neural networks, and counterfactual explanations. Discusses latency budgets for real-time explanations, caching strategies for SHAP values, A/B testing explanation quality, and regulatory requirements for model transparency (EU AI Act, FDA guidance). Includes Python implementation patterns with shap, lime, and captum libraries, and architecture patterns for serving explanations alongside predictions.',
+    id: 'sql-patterns-analytics',
+    title: 'SQL Patterns Every Data Analyst Should Know',
+    excerpt: 'From window functions to recursive CTEs — practical SQL patterns that transform how you query and analyze data. With real examples from production workloads.',
+    longDescription: 'SQL is often treated as a simple query language, but its advanced features enable powerful analytical workflows that would otherwise require complex application code. This article covers window functions for running totals and rankings, recursive CTEs for hierarchical data, lateral joins for complex calculations, and materialized views for performance optimization. Each pattern includes a real-world scenario from my internship experience, the SQL implementation, and performance considerations.',
+    category: 'Data Engineering',
+    tags: ['SQL', 'PostgreSQL', 'Window Functions', 'CTEs', 'Performance', 'Analytics'],
+    date: '2025-09-10',
+    readTime: '10 min',
+    featured: false,
+    status: 'Published',
+    url: 'https://kavyashah.dev/writing/sql-patterns',
+    githubUrl: null,
+  },
+  {
+    id: 'ml-production-lessons',
+    title: 'Taking ML Models from Notebook to Production',
+    excerpt: 'The gap between a working Jupyter notebook and a reliable production ML system. Lessons learned deploying models at scale — monitoring, drift detection, and CI/CD for ML.',
+    longDescription: 'Building a model is only 20% of the work. The other 80% is making it reliable, monitorable, and maintainable in production. This article shares hard-won lessons from deploying ML systems: feature store design, model versioning with MLflow, data drift detection using statistical tests, automated retraining pipelines, and A/B testing frameworks. I also cover the organizational challenges — model ownership, incident response, and the relationship between data scientists and ML engineers.',
     category: 'Machine Learning',
-    tags: ['SHAP', 'LIME', 'Explainability', 'Production ML', 'Python', 'Regulation', 'Captum'],
-    date: '2026-05-20',
-    readTime: '22 min',
-    status: 'Published',
-    githubUrl: 'https://github.com/kavyashah/ml-explainability',
-    externalUrl: null,
-    icon: BookOpen,
-    color: 'secondary',
+    tags: ['MLOps', 'Model Deployment', 'Monitoring', 'Drift Detection', 'CI/CD', 'MLflow'],
+    date: '2025-07-22',
+    readTime: '15 min',
     featured: false,
-    wordCount: 5900,
-    series: 'ML Engineering',
-    part: 2,
-    totalParts: 4,
+    status: 'In Progress',
+    url: null,
+    githubUrl: 'https://github.com/kavyashah/ml-production-patterns',
   },
   {
-    id: 'typescript-type-system',
-    title: 'Advanced TypeScript: Typing the Untypeable',
-    excerpt: 'Pushing TypeScript\'s type system to its limits — conditional types, template literals, recursive types, and type-level programming for runtime safety.',
-    longDescription: 'An exploration of TypeScript\'s advanced type system features for achieving runtime safety through compile-time guarantees. Covers conditional types with infer for pattern matching, template literal types for string manipulation, recursive types for tree structures, variadic tuple types for function composition, and type-level programming with the type-fest patterns. Includes practical examples: type-safe event emitters, database query builders, API client generation from OpenAPI specs, and form validation schemas. Also covers the limits of the type system and when to use runtime validation instead.',
-    category: 'Web Development',
-    tags: ['TypeScript', 'Type System', 'Conditional Types', 'Template Literals', 'Type-Level Programming'],
-    date: '2026-04-10',
-    readTime: '18 min',
+    id: 'healthcare-data-privacy',
+    title: 'Privacy-First Architecture for Healthcare Applications',
+    excerpt: 'Designing systems that protect sensitive health data by default — encryption, access control, audit logging, and compliance patterns for HIPAA/GDPR alignment.',
+    longDescription: 'Healthcare data demands a fundamentally different approach to privacy and security. This article explores architectural patterns for building privacy-first systems: end-to-end encryption with client-side keys, attribute-based access control (ABAC) for fine-grained permissions, comprehensive audit logging with tamper-proof storage, data minimization principles, and consent management workflows. I also discuss the tension between privacy and utility — how to enable AI insights on encrypted data using techniques like federated learning and secure multi-party computation.',
+    category: 'Healthcare Technology',
+    tags: ['Privacy', 'Security', 'HIPAA', 'GDPR', 'Encryption', 'Federated Learning', 'Architecture'],
+    date: '2025-05-18',
+    readTime: '11 min',
+    featured: true,
     status: 'Published',
-    githubUrl: 'https://github.com/kavyashah/ts-advanced-patterns',
-    externalUrl: null,
-    icon: FileText,
-    color: 'accent',
+    url: 'https://kavyashah.dev/writing/healthcare-privacy',
+    githubUrl: null,
+  },
+  {
+    id: 'student-to-founder',
+    title: 'From Student Project to Startup: The VitaVerse Journey',
+    excerpt: 'Building a digital health startup while completing a BSc. The realities of balancing academic deadlines with product development, fundraising, and team building.',
+    longDescription: 'A candid reflection on the journey from a university project to a venture-backed startup. I share the timeline, the pivotal decisions, the mistakes, and the unexpected lessons. Topics include: validating a problem space as a student, building an MVP with limited resources, the first hires and advisors, navigating Italian/EU startup regulations as a student founder, balancing coursework with investor meetings, and the mental health reality of the founder journey. This isn\'t a success story — it\'s a work-in-progress report.',
+    category: 'Entrepreneurship',
+    tags: ['Startup', 'Founder Journey', 'Student Entrepreneurship', 'Digital Health', 'Venture Capital', 'Team Building'],
+    date: '2025-03-05',
+    readTime: '9 min',
     featured: false,
-    wordCount: 4500,
-    series: 'TypeScript Deep Dive',
-    part: 1,
-    totalParts: 3,
+    status: 'Published',
+    url: 'https://kavyashah.dev/writing/student-to-founder',
+    githubUrl: null,
+  },
+  {
+    id: 'fhir-healthcare-interop',
+    title: 'FHIR R4 in Practice: Building Interoperable Health Systems',
+    excerpt: 'A practical guide to implementing FHIR resources, bundles, and search patterns in real applications. Code-first approach with TypeScript and HAPI FHIR.',
+    longDescription: 'FHIR (Fast Healthcare Interoperability Resources) is the modern standard for healthcare data exchange, but its complexity can be daunting. This article provides a practical, code-first introduction to FHIR R4: resource types and profiles, Bundles for transactions and search results, the RESTful search API with chained parameters, FHIRPath for querying, and validation against profiles. I include TypeScript interfaces generated from the official specification, HAPI FHIR server setup, and patterns for mapping between FHIR and application domain models.',
+    category: 'Healthcare Technology',
+    tags: ['FHIR', 'Healthcare Interoperability', 'HAPI FHIR', 'TypeScript', 'HL7', 'Standards'],
+    date: '2025-01-30',
+    readTime: '14 min',
+    featured: false,
+    status: 'Published',
+    url: 'https://kavyashah.dev/writing/fhir-practice',
+    githubUrl: 'https://github.com/kavyashah/fhir-typescript-starter',
+  },
+  {
+    id: 'async-react-patterns',
+    title: 'Async Patterns in React: Beyond useEffect',
+    excerpt: 'Managing asynchronous state in React applications — from data fetching to background jobs. Comparing TanStack Query, SWR, React Query, and custom solutions.',
+    longDescription: 'React\'s built-in tools for async state are minimal by design, leaving developers to choose from a growing ecosystem of solutions. This article compares the major approaches: TanStack Query (React Query) for server state, SWR for lightweight caching, RTK Query for Redux integration, and custom hooks for specialized needs. I cover caching strategies, optimistic updates, background refetching, pagination patterns, mutation handling, and the often-overlooked topic of testing async components. Performance benchmarks and bundle size comparisons included.',
+    category: 'Software Engineering',
+    tags: ['React', 'TanStack Query', 'SWR', 'State Management', 'Async', 'Performance', 'Testing'],
+    date: '2024-11-12',
+    readTime: '13 min',
+    featured: false,
+    status: 'Published',
+    url: 'https://kavyashah.dev/writing/async-react',
+    githubUrl: null,
   },
 ]
+
+const categoryIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  'Healthcare Technology': HeartPulse,
+  'Data Visualization': Activity,
+  'Data Engineering': Database,
+  'Machine Learning': Brain,
+  'Entrepreneurship': Rocket,
+  'Software Engineering': Code,
+}
+
+const statusColors: Record<string, { bg: string; text: string; border: string }> = {
+  Published: { bg: 'bg-emerald-500/10', text: 'text-emerald-600', border: 'border-emerald-500/20' },
+  'In Progress': { bg: 'bg-primary/10', text: 'text-primary', border: 'border-primary/20' },
+  Draft: { bg: 'bg-amber-500/10', text: 'text-amber-600', border: 'border-amber-500/20' },
+}
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -212,407 +158,43 @@ const itemVariants = {
   },
 }
 
-const listItemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.4,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-}
-
-const modalVariants = {
-  hidden: { opacity: 0, scale: 0.95, y: 20 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      duration: 0.35,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.95,
-    y: 20,
-    transition: {
-      duration: 0.25,
-      ease: [0.7, 0, 0.84, 0],
-    },
-  },
-}
-
-const overlayVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.2 } },
-  exit: { opacity: 0, transition: { duration: 0.2 } },
-}
-
-const categoryColors = {
-  primary: { bg: 'bg-primary/10', text: 'text-primary', border: 'border-primary/20', glow: 'primary' },
-  accent: { bg: 'bg-accent/10', text: 'text-accent', border: 'border-accent/20', glow: 'accent' },
-  secondary: { bg: 'bg-secondary/10', text: 'text-secondary', border: 'border-secondary/20', glow: 'secondary' },
-}
-
-const statusColors = {
-  'Published': { bg: 'bg-emerald-500/10', text: 'text-emerald-600', border: 'border-emerald-200/50', icon: null },
-  'Draft': { bg: 'bg-amber-500/10', text: 'text-amber-600', border: 'border-amber-200/50', icon: null },
-  'In Progress': { bg: 'bg-primary/10', text: 'text-primary', border: 'border-primary/20', icon: null },
-  'Planned': { bg: 'bg-muted-foreground/10', text: 'text-muted-foreground', border: 'border-muted-foreground/20', icon: null },
-}
-
-interface WritingModalProps {
-  piece: typeof writingPieces[0]
-  isOpen: boolean
-  onClose: () => void
-  onNavigate: (direction: 'prev' | 'next') => void
-  hasPrev: boolean
-  hasNext: boolean
-}
-
-function WritingModal({ piece, isOpen, onClose, onNavigate, hasPrev, hasNext }: WritingModalProps) {
-  const prefersReducedMotion = useReducedMotion()
-  const colorScheme = categoryColors[piece.color as keyof typeof categoryColors] || categoryColors.primary
-  const statusScheme = statusColors[piece.status as keyof typeof statusColors] || statusColors['Draft']
-
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') onClose()
-    if (e.key === 'ArrowLeft' && hasPrev) onNavigate('prev')
-    if (e.key === 'ArrowRight' && hasNext) onNavigate('next')
-  }
-
-  React.useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = 'hidden'
-    }
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = ''
-    }
-  }, [isOpen, hasPrev, hasNext, onClose, onNavigate])
-
-  if (!isOpen) return null
-
-  return (
-    <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 z-[600] flex items-center justify-center p-4 lg:p-8"
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        variants={overlayVariants}
-        onClick={onClose}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
-        <motion.div
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-          variants={overlayVariants}
-        />
-
-        <motion.div
-          className="relative w-full max-w-5xl max-h-[90vh] overflow-hidden glass-strong rounded-2xl"
-          variants={modalVariants}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {/* Modal Header */}
-          <div className="flex items-start justify-between p-6 border-b border-border/30 sticky top-0 bg-background/95 backdrop-blur-sm z-10">
-            <div className="flex-1 pr-6">
-              <div className="flex items-center gap-3 mb-3 flex-wrap">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${colorScheme.bg} ${colorScheme.text} ${colorScheme.border} border`} aria-hidden="true">
-                  <piece.icon className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium font-heading ${statusScheme.bg} ${statusScheme.text} ${statusScheme.border} border flex items-center gap-1.5`}>
-                    {piece.status}
-                  </span>
-                  {piece.featured && (
-                    <span className="ml-2 flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/10 text-amber-600 border border-amber-200/50">
-                      <span className="text-xs font-medium font-heading">Featured</span>
-                    </span>
-                  )}
-                </div>
-              </div>
-              <h2 id="modal-title" className="text-h2 font-heading font-semibold tracking-tight text-foreground mb-2">
-                {piece.title}
-              </h2>
-              <p id="modal-description" className="text-body text-muted-foreground">{piece.excerpt}</p>
-            </div>
-
-            <motion.button
-              onClick={onClose}
-              className="glass p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-all duration-fast flex-shrink-0"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Close article details"
-            >
-              <X className="h-5 w-5" />
-            </motion.button>
-          </div>
-
-          {/* Modal Content */}
-          <div className="p-6 lg:p-8 overflow-y-auto max-h-[calc(90vh-80px)]">
-            <div className="grid lg:grid-cols-3 gap-8">
-              {/* Left Column - Main Content */}
-              <div className="lg:col-span-2 space-y-6">
-                {/* Full Description */}
-                <div className="space-y-4">
-                  <h3 className="text-h4 font-heading font-medium tracking-tight text-foreground">About This Article</h3>
-                  <div className="prose prose-muted max-w-none">
-                    <p className="text-body text-muted-foreground leading-relaxed whitespace-pre-wrap">{piece.longDescription}</p>
-                  </div>
-                </div>
-
-                {/* Article Metadata */}
-                <div className="p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm">
-                  <h3 className="text-h4 font-heading font-medium tracking-tight text-foreground mb-4 flex items-center gap-2">
-                    <BookOpen className="h-5 w-5 text-accent" aria-hidden="true" />
-                    Article Details
-                  </h3>
-                  <dl className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <dt className="text-muted-foreground mb-1">Word Count</dt>
-                      <dd className="text-foreground font-medium">{piece.wordCount > 0 ? piece.wordCount.toLocaleString() : '—'}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-muted-foreground mb-1">Read Time</dt>
-                      <dd className="text-foreground font-medium">{piece.readTime}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-muted-foreground mb-1">Published</dt>
-                      <dd className="text-foreground font-medium">{new Date(piece.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</dd>
-                    </div>
-                    <div>
-                      <dt className="text-muted-foreground mb-1">Series</dt>
-                      <dd className="text-foreground font-medium">{piece.series} {piece.totalParts > 1 ? `(Part ${piece.part} of ${piece.totalParts})` : ''}</dd>
-                    </div>
-                  </dl>
-                </div>
-
-                {/* Tags */}
-                <div className="space-y-3">
-                  <h3 className="text-h4 font-heading font-medium tracking-tight text-foreground flex items-center gap-2">
-                    <Tag className="h-5 w-5 text-accent" aria-hidden="true" />
-                    Topics
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {piece.tags.map((tag) => (
-                      <motion.span
-                        key={tag}
-                        className="px-3 py-1.5 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm text-sm font-medium text-foreground hover:border-accent/30 hover:bg-accent/5 transition-all duration-fast"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.1 }}
-                      >
-                        {tag}
-                      </motion.span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column - Sidebar */}
-              <div className="space-y-6">
-                {/* Action Buttons */}
-                <div className="p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm sticky top-24">
-                  <h3 className="text-h4 font-heading font-medium tracking-tight text-foreground mb-4 flex items-center gap-2">
-                    <ArrowUpRight className="h-5 w-5 text-accent" aria-hidden="true" />
-                    Actions
-                  </h3>
-                  <div className="space-y-3">
-                    {piece.githubUrl && (
-                      <motion.a
-                        href={piece.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-primary w-full justify-center gap-2"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        aria-label="View repository on GitHub"
-                      >
-                        <Github className="h-5 w-5" aria-hidden="true" />
-                        View Repository
-                      </motion.a>
-                    )}
-                    {piece.externalUrl && (
-                      <motion.a
-                        href={piece.externalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-secondary w-full justify-center gap-2"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        aria-label="Read full article"
-                      >
-                        <ExternalLink className="h-5 w-5" aria-hidden="true" />
-                        Read Article
-                      </motion.a>
-                    )}
-                    {!piece.githubUrl && !piece.externalUrl && (
-                      <div className="btn-ghost w-full justify-center gap-2 text-muted-foreground">
-                        <span>Not yet published</span>
-                      </div>
-                    )}
-                    <motion.button
-                      className="btn-outline w-full justify-center gap-2"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => navigator.share?.({ title: piece.title, text: piece.excerpt, url: window.location.href })}
-                    >
-                      <Share2 className="h-5 w-5" aria-hidden="true" />
-                      Share Article
-                    </motion.button>
-                    <motion.button
-                      className="btn-ghost w-full justify-center gap-2"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Download className="h-5 w-5" aria-hidden="true" />
-                      Save for Later
-                    </motion.button>
-                  </div>
-                </div>
-
-                {/* Series Navigation */}
-                {piece.totalParts > 1 && (
-                  <div className="p-4 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm sticky top-24">
-                    <h3 className="text-h4 font-heading font-medium tracking-tight text-foreground mb-4 flex items-center gap-2">
-                      <BookOpen className="h-5 w-5 text-accent" aria-hidden="true" />
-                      Series: {piece.series}
-                    </h3>
-                    <div className="space-y-2">
-                      {Array.from({ length: piece.totalParts }, (_, i) => i + 1).map((partNum) => (
-                        <div
-                          key={partNum}
-                          className={`flex items-center gap-3 p-3 rounded-lg transition-all ${
-                            partNum === piece.part
-                              ? 'bg-accent/10 border-accent/30 border'
-                              : 'bg-background/50 border-border/30 border'
-                          }`}
-                        >
-                          <span className={`w-8 h-8 rounded-full flex items-center justify-center font-mono font-medium text-sm ${
-                            partNum === piece.part
-                              ? 'bg-accent text-bg'
-                              : 'text-muted-foreground bg-muted/50'
-                          }`}>
-                            {partNum}
-                          </span>
-                          <span className={`font-medium ${partNum === piece.part ? 'text-foreground' : 'text-muted-foreground'}`}>
-                            Part {partNum}
-                          </span>
-                          {partNum === piece.part && (
-                            <span className="ml-auto text-xs font-medium text-accent">Current</span>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Modal Footer Navigation */}
-          {(hasPrev || hasNext) && (
-            <div className="flex items-center justify-between p-6 border-t border-border/30 bg-background/50 backdrop-blur-sm">
-              <motion.button
-                onClick={() => hasPrev && onNavigate('prev')}
-                disabled={!hasPrev}
-                className="btn-secondary gap-2 disabled:opacity-30 disabled:cursor-not-allowed"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                aria-label="Previous article"
-              >
-                <ChevronsLeft className="h-4 w-4" />
-                Previous Article
-              </motion.button>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <kbd className="px-2 py-1 rounded bg-background border border-border/50 font-mono">←</kbd>
-                <span>Navigate Articles</span>
-                <kbd className="px-2 py-1 rounded bg-background border border-border/50 font-mono">→</kbd>
-              </div>
-              <motion.button
-                onClick={() => hasNext && onNavigate('next')}
-                disabled={!hasNext}
-                className="btn-secondary gap-2 ml-auto disabled:opacity-30 disabled:cursor-not-allowed"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                aria-label="Next article"
-              >
-                Next Article
-                <ChevronsRight className="h-4 w-4" />
-              </motion.button>
-            </div>
-          )}
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
-  )
-}
-
-function formatDate(dateStr: string): string {
-  const date = new Date(dateStr)
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-}
-
 export function Writing() {
   const prefersReducedMotion = useReducedMotion()
   const [viewMode, setViewMode] = React.useState<'grid' | 'list'>('grid')
-  const [openPiece, setOpenPiece] = React.useState<typeof writingPieces[0] | null>(null)
-  const [currentPieceIndex, setCurrentPieceIndex] = React.useState(0)
   const [searchQuery, setSearchQuery] = React.useState('')
-  const [filterCategory, setFilterCategory] = React.useState<string>('All')
-  const [filterStatus, setFilterStatus] = React.useState<string>('all')
+  const [selectedCategory, setSelectedCategory] = React.useState<string>('all')
+  const [openArticle, setOpenArticle] = React.useState<typeof writingPieces[0] | null>(null)
+  const [currentArticleIndex, setCurrentArticleIndex] = React.useState(0)
 
-  const featuredWriting = writingPieces.filter(w => w.featured)
-  const allWriting = writingPieces
+  const categories = ['all', ...Array.from(new Set(writingPieces.map(p => p.category)))]
 
-  // Filter writing pieces
-  const filteredWriting = allWriting.filter(piece => {
-    const matchesSearch = piece.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         piece.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         piece.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()))
-    const matchesCategory = filterCategory === 'All' || piece.category === filterCategory
-    const matchesStatus = filterStatus === 'all' || piece.status.toLowerCase().replace(' ', '-') === filterStatus
-    return matchesSearch && matchesCategory && matchesStatus
+  const filteredArticles = writingPieces.filter(article => {
+    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      article.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      article.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+    const matchesCategory = selectedCategory === 'all' || article.category === selectedCategory
+    return matchesSearch && matchesCategory
   })
 
-  const categories = ['All', ...new Set(allWriting.map(w => w.category))].sort((a, b) => a === 'All' ? -1 : b === 'All' ? 1 : a.localeCompare(b))
-  const statuses = [...new Set(allWriting.map(w => w.status.toLowerCase().replace(' ', '-')))].sort()
-
-  const handleOpenModal = (piece: typeof writingPieces[0], index: number) => {
-    setCurrentPieceIndex(index)
-    setOpenPiece(piece)
+  const handleOpenModal = (article: typeof writingPieces[0], index: number) => {
+    setCurrentArticleIndex(index)
+    setOpenArticle(article)
   }
 
   const handleCloseModal = () => {
-    setOpenPiece(null)
+    setOpenArticle(null)
   }
 
   const handleNavigate = (direction: 'prev' | 'next') => {
-    const currentIndex = filteredWriting.findIndex(p => p.id === openPiece?.id)
-    if (currentIndex === -1) return
-
-    let newIndex: number
-    if (direction === 'prev') {
-      newIndex = currentIndex > 0 ? currentIndex - 1 : filteredWriting.length - 1
-    } else {
-      newIndex = currentIndex < filteredWriting.length - 1 ? currentIndex + 1 : 0
-    }
-
-    setCurrentPieceIndex(newIndex)
-    setOpenPiece(filteredWriting[newIndex])
+    const newIndex = direction === 'prev'
+      ? (currentArticleIndex > 0 ? currentArticleIndex - 1 : filteredArticles.length - 1)
+      : (currentArticleIndex < filteredArticles.length - 1 ? currentArticleIndex + 1 : 0)
+    setCurrentArticleIndex(newIndex)
+    setOpenArticle(filteredArticles[newIndex])
   }
 
-  const hasPrev = filteredWriting.length > 1
-  const hasNext = filteredWriting.length > 1
+  const hasPrev = filteredArticles.length > 1
+  const hasNext = filteredArticles.length > 1
 
   return (
     <>
@@ -634,456 +216,556 @@ export function Writing() {
               className="inline-block text-xs font-medium text-accent uppercase tracking-widest mb-4 font-heading"
               variants={itemVariants}
             >
-              Chapter Six
+              Chapter Three
             </motion.span>
             <motion.h2
               id="writing-title"
               className="text-h1 font-heading font-semibold tracking-tight text-foreground mb-6"
               variants={itemVariants}
             >
-              Writing & <span className="text-primary">research</span>
+              Writing & <span className="text-primary">deep dives</span>
             </motion.h2>
             <motion.p
               className="text-body-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto"
               variants={itemVariants}
             >
-              Technical articles, project retrospectives, and research notes on data science, AI, and healthcare technology.
+              Technical articles, case studies, and deep dives on data science, AI, healthcare technology, and product building.
             </motion.p>
           </motion.div>
 
-          {/* Controls - Search, Filters, View Mode */}
+          {/* Controls */}
           <motion.div
-            className="mb-10"
+            className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between mb-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            {/* Search */}
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" aria-hidden="true" />
+              <input
+                type="search"
+                placeholder="Search articles..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 rounded-xl border border-border/50 bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-transparent transition-all duration-fast"
+                aria-label="Search articles"
+              />
+            </div>
+
+            {/* Category Filter */}
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-4 py-2 rounded-xl text-sm font-medium font-heading transition-all duration-fast ${
+                    selectedCategory === cat
+                      ? 'bg-accent text-accent-foreground shadow-xl shadow-accent/25'
+                      : 'border border-border/50 bg-background/50 backdrop-blur-sm text-foreground hover:border-accent/30'
+                  }`}
+                  aria-pressed={selectedCategory === cat}
+                >
+                  {cat === 'all' ? 'All' : cat}
+                </button>
+              ))}
+            </div>
+
+            {/* View Mode Toggle */}
+            <div className="flex items-center gap-2 border border-border/50 bg-background/50 backdrop-blur-sm rounded-xl p-1" role="group" aria-label="View mode">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`p-2 rounded-lg transition-all duration-fast ${
+                  viewMode === 'grid'
+                    ? 'bg-accent text-accent-foreground shadow-md'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                aria-label="Grid view"
+                aria-pressed={viewMode === 'grid'}
+              >
+                <LayoutGrid className="h-5 w-5" aria-hidden="true" />
+              </button>
+              <button
+                onClick={() => setViewMode('list')}
+                className={`p-2 rounded-lg transition-all duration-fast ${
+                  viewMode === 'list'
+                    ? 'bg-accent text-accent-foreground shadow-md'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                aria-label="List view"
+                aria-pressed={viewMode === 'list'}
+              >
+                <List className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Results Count */}
+          <motion.p
+            className="text-sm text-muted-foreground mb-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            Showing {filteredArticles.length} of {writingPieces.length} articles
+          </motion.p>
+
+          {/* Articles Grid/List */}
+          <motion.div
+            className={viewMode === 'grid' ? 'grid gap-6 lg:grid-cols-2 xl:grid-cols-3' : 'space-y-4'}
             variants={sectionVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
           >
-            <div className="glass p-4 rounded-2xl space-y-4">
-              {/* Search */}
-              <div className="relative max-w-md mx-auto sm:mx-0">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" aria-hidden="true" />
-                <input
-                  type="search"
-                  placeholder="Search articles..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-12 py-3 pr-4 rounded-xl border border-border/30 bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50 transition-all"
-                  aria-label="Search articles"
-                />
-              </div>
+            {filteredArticles.map((article, index) => {
+              const CategoryIcon = categoryIcons[article.category] || FileText
+              const statusStyle = statusColors[article.status] || statusColors.Published
 
-              {/* Filters */}
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                <div className="relative">
-                  <select
-                    value={filterCategory}
-                    onChange={(e) => setFilterCategory(e.target.value)}
-                    className="appearance-none px-4 py-2.5 pr-10 rounded-xl border border-border/30 bg-background/50 backdrop-blur-sm text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50 transition-all cursor-pointer"
-                    aria-label="Filter by category"
-                  >
-                    {categories.map(cat => (
-                      <option key={cat} value={cat}>{cat}</option>
-                    ))}
-                  </select>
-                  <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" aria-hidden="true" />
-                </div>
-                <div className="relative">
-                  <select
-                    value={filterStatus}
-                    onChange={(e) => setFilterStatus(e.target.value)}
-                    className="appearance-none px-4 py-2.5 pr-10 rounded-xl border border-border/30 bg-background/50 backdrop-blur-sm text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent/50 transition-all cursor-pointer"
-                    aria-label="Filter by status"
-                  >
-                    <option value="all">All Statuses</option>
-                    {statuses.map(status => (
-                      <option key={status} value={status}>
-                        {status.charAt(0).toUpperCase() + status.slice(1).replace('-', ' ')}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronRight className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" aria-hidden="true" />
-                </div>
-              </div>
-
-              {/* View Mode Toggle */}
-              <div className="flex justify-center">
-                <div className="glass px-2 py-2 rounded-xl flex items-center gap-2">
-                  <button
-                    onClick={() => setViewMode('grid')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      viewMode === 'grid' ? 'text-foreground bg-accent/10' : 'text-muted-foreground hover:text-foreground hover:bg-accent/5'
-                    }`}
-                    aria-pressed={viewMode === 'grid'}
-                    aria-label="Grid view"
-                  >
-                    <LayoutGrid className="h-4 w-4" aria-hidden="true" />
-                    <span className="hidden sm:inline">Grid</span>
-                  </button>
-                  <button
-                    onClick={() => setViewMode('list')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      viewMode === 'list' ? 'text-foreground bg-accent/10' : 'text-muted-foreground hover:text-foreground hover:bg-accent/5'
-                    }`}
-                    aria-pressed={viewMode === 'list'}
-                    aria-label="List view"
-                  >
-                    <List className="h-4 w-4" aria-hidden="true" />
-                    <span className="hidden sm:inline">List</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Writing Grid */}
-          {viewMode === 'grid' && (
-            <motion.div
-              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-              variants={sectionVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-            >
-              {filteredWriting.map((piece, index) => {
-                const Icon = piece.icon
-                const colorScheme = categoryColors[piece.color as keyof typeof categoryColors] || categoryColors.primary
-                const statusScheme = statusColors[piece.status as keyof typeof statusColors] || statusColors['Draft']
-
+              if (viewMode === 'grid') {
                 return (
                   <motion.article
-                    key={piece.id}
-                    className="card-editorial h-full flex flex-col overflow-hidden group cursor-pointer"
-                    onClick={() => handleOpenModal(piece, index)}
+                    key={article.id}
+                    className="card-editorial h-full flex flex-col overflow-hidden relative group cursor-pointer"
+                    onClick={() => handleOpenModal(article, index)}
                     variants={itemVariants}
                     style={{ transitionDelay: `${index * 80}ms` }}
                   >
-                    {/* Status badge */}
-                    <div className="absolute top-4 right-4 z-10">
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium font-heading ${statusScheme.bg} ${statusScheme.text} ${statusScheme.border} border`}>
-                        {piece.status}
+                    {/* Category & Status Badges */}
+                    <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
+                      <div
+                        className={`px-3 py-1 rounded-full text-xs font-medium font-heading ${statusStyle.bg} ${statusStyle.text} ${statusStyle.border} border`}
+                      >
+                        {article.status}
                       </div>
+                      {article.featured && (
+                        <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/10 text-amber-600 border border-amber-200/50">
+                          <Star className="h-3 w-3" aria-hidden="true" />
+                          <span className="text-xs font-medium font-heading">Featured</span>
+                        </div>
+                      )}
                     </div>
 
-                    {/* Article Visual */}
+                    {/* Article Header Visual */}
                     <div className="relative aspect-video overflow-hidden rounded-xl mb-6">
-                      <div className="absolute inset-0 flex items-center justify-center" style={{ background: `var(--${piece.color}-glow)` }}>
-                        <div className={`w-20 h-20 rounded-2xl flex items-center justify-center ${colorScheme.bg} ${colorScheme.text} ${colorScheme.border} border group-hover:scale-110 transition-transform duration-normal`} aria-hidden="true">
-                          <Icon className="h-10 w-10" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10" aria-hidden="true" />
+                      <div className="relative z-10 absolute inset-0 flex items-center justify-center">
+                        <div className="w-20 h-20 rounded-2xl bg-white/50 backdrop-blur-sm flex items-center justify-center border border-border/30 group-hover:scale-110 transition-transform duration-normal">
+                          <CategoryIcon className="h-10 w-10 text-primary/50" aria-hidden="true" />
                         </div>
                       </div>
 
-                      {/* Grid pattern overlay */}
-                      <div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-normal"
-                        aria-hidden="true"
-                        style={{
-                          backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cpath stroke='currentColor' strokeWidth='0.3' d='M0 0h40v40H0zM20 0v40M0 20h40'/%3E%3C/g%3E%3C/svg%3E")`,
-                          backgroundSize: '40px 40px',
-                          color: `var(--${piece.color})`,
-                        }}
-                      />
-
                       {/* Overlay on hover */}
-                      <div className="absolute inset-0 bg-background/90 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-normal flex items-center justify-center gap-3 p-4">
-                        {piece.githubUrl && (
-                          <motion.a
-                            href={piece.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="glass px-3 py-2 rounded-xl text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-2"
-                            whileHover={{ scale: 1.02 }}
-                            onClick={(e) => e.stopPropagation()}
-                            aria-label="View repository on GitHub"
-                          >
-                            <Github className="h-4 w-4" aria-hidden="true" />
-                            Repository
-                          </motion.a>
-                        )}
-                        {piece.externalUrl && (
-                          <motion.a
-                            href={piece.externalUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="glass px-3 py-2 rounded-xl text-sm font-medium text-foreground hover:text-accent transition-colors flex items-center gap-2"
-                            whileHover={{ scale: 1.02 }}
-                            onClick={(e) => e.stopPropagation()}
-                            aria-label="Read full article"
-                          >
-                            <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                            Read Article
-                          </motion.a>
-                        )}
-                        {!piece.githubUrl && !piece.externalUrl && (
-                          <div className="glass px-3 py-2 rounded-xl text-sm font-medium text-muted-foreground flex items-center gap-2">
-                            <span>Coming Soon</span>
-                          </div>
-                        )}
+                      <div className="absolute inset-0 bg-background/80 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-normal flex items-center justify-center">
+                        <motion.div
+                          className="glass px-4 py-2 rounded-xl text-sm font-medium text-foreground hover:text-accent transition-colors flex items-center gap-2"
+                          whileHover={{ scale: 1.02 }}
+                          aria-label="Read article"
+                        >
+                          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                          Read Article
+                        </motion.div>
                       </div>
                     </div>
 
                     {/* Article Content */}
                     <div className="flex-1 flex flex-col space-y-4">
-                      {/* Category */}
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className={`px-2.5 py-1 rounded-full text-xs font-medium font-heading ${colorScheme.bg} ${colorScheme.text} ${colorScheme.border} border`}>
-                          {piece.category}
+                      {/* Category & Date */}
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`w-8 h-8 rounded-lg flex items-center justify-center ${statusStyle.bg} ${statusStyle.text} ${statusStyle.border} border`}
+                          aria-hidden="true"
+                        >
+                          <CategoryIcon className="h-4 w-4" />
+                        </div>
+                        <span className="text-xs font-medium text-muted-foreground uppercase tracking-widest font-heading">
+                          {article.category}
                         </span>
-                        {piece.featured && (
-                          <span className="flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/10 text-amber-600 border border-amber-200/50">
-                            <span className="text-xs font-medium font-heading">Featured</span>
+                        <span className="text-xs text-muted-foreground ml-auto">
+                          {new Date(article.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                        </span>
+                      </div>
+
+                      <h3 className="text-h3 font-heading font-medium tracking-tight text-foreground mb-2 group-hover:text-accent transition-colors">
+                        {article.title}
+                      </h3>
+
+                      <p className="text-body text-muted-foreground leading-relaxed line-clamp-3 flex-1">
+                        {article.excerpt}
+                      </p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 pt-2 border-t border-border/30">
+                        {article.tags.slice(0, 4).map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2.5 py-1 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm text-xs font-medium text-foreground hover:border-accent/30 hover:bg-accent/5 transition-all duration-fast cursor-default"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                        {article.tags.length > 4 && (
+                          <span className="px-2.5 py-1 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm text-xs font-medium text-muted-foreground">
+                            +{article.tags.length - 4}
                           </span>
                         )}
                       </div>
 
-                      <h3 className="text-h4 font-heading font-medium tracking-tight text-foreground mb-2 line-clamp-2">
-                        {piece.title}
-                      </h3>
-
-                      <p className="text-body text-muted-foreground leading-relaxed line-clamp-3 flex-1">
-                        {piece.excerpt}
-                      </p>
-
-                      {/* Tags */}
-                      <div className="pt-2 border-t border-border/30">
-                        <div className="flex flex-wrap gap-1.5">
-                          {piece.tags.slice(0, 5).map((tag) => (
-                            <motion.span
-                              key={tag}
-                              className="px-2.5 py-1 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm text-xs font-medium text-foreground hover:border-accent/30 hover:bg-accent/5 transition-all duration-fast"
-                              initial={{ opacity: 0, scale: 0.9 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: 0.2 }}
-                            >
-                              {tag}
-                            </motion.span>
-                          ))}
-                          {piece.tags.length > 5 && (
-                            <motion.span
-                              className="px-2.5 py-1 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm text-xs font-medium text-muted-foreground"
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              transition={{ delay: 0.3 }}
-                            >
-                              +{piece.tags.length - 5} more
-                            </motion.span>
-                          )}
+                      {/* Meta & Actions */}
+                      <div className="flex items-center justify-between pt-2 border-t border-border/30">
+                        <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+                            {article.readTime}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium text-accent group-hover:gap-2 transition-gap flex items-center">
+                            Read
+                            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                          </span>
                         </div>
                       </div>
-
-                      {/* Meta footer */}
-                      <div className="pt-4 border-t border-border/30 flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-caption text-muted-foreground">
-                          <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
-                          <span>{formatDate(piece.date)}</span>
-                          <span className="text-border">•</span>
-                          <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-                          <span>{piece.readTime}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          {piece.githubUrl && (
-                            <a
-                              href={piece.githubUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="p-2 rounded-lg glass text-muted-foreground hover:text-accent hover:bg-accent/10 transition-all duration-fast"
-                              onClick={(e) => e.stopPropagation()}
-                              aria-label="View repository"
-                            >
-                              <Github className="h-4 w-4" />
-                            </a>
-                          )}
-                          {piece.externalUrl && (
-                            <a
-                              href={piece.externalUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="p-2 rounded-lg glass text-muted-foreground hover:text-accent hover:bg-accent/10 transition-all duration-fast"
-                              onClick={(e) => e.stopPropagation()}
-                              aria-label="Read article"
-                            >
-                              <ExternalLink className="h-4 w-4" />
-                            </a>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* View Details CTA */}
-                      <motion.div
-                        className="pt-4 border-t border-border/30"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
-                      >
-                        <div className="flex items-center justify-between text-sm font-medium text-accent group-hover:gap-2 transition-gap">
-                          <span>Read Article</span>
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                        </div>
-                      </motion.div>
                     </div>
                   </motion.article>
                 )
-              })}
-            </motion.div>
-          )}
-
-          {/* Writing List */}
-          {viewMode === 'list' && (
-            <motion.div
-              className="space-y-4"
-              variants={sectionVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-            >
-              {filteredWriting.map((piece, index) => {
-                const Icon = piece.icon
-                const colorScheme = categoryColors[piece.color as keyof typeof categoryColors] || categoryColors.primary
-                const statusScheme = statusColors[piece.status as keyof typeof statusColors] || statusColors['Draft']
-
+              } else {
+                // List view
                 return (
                   <motion.article
-                    key={piece.id}
-                    className="card-editorial flex flex-row gap-6 p-6 group cursor-pointer overflow-hidden"
-                    onClick={() => handleOpenModal(piece, index)}
-                    variants={listItemVariants}
+                    key={article.id}
+                    className="card-editorial flex flex-row gap-6 p-6 group cursor-pointer"
+                    onClick={() => handleOpenModal(article, index)}
+                    variants={itemVariants}
                     style={{ transitionDelay: `${index * 60}ms` }}
                   >
-                    {/* Visual */}
-                    <div className="relative w-32 h-32 flex-shrink-0 rounded-xl overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center" style={{ background: `var(--${piece.color}-glow)` }}>
-                        <div className={`w-16 h-16 rounded-xl flex items-center justify-center ${colorScheme.bg} ${colorScheme.text} ${colorScheme.border} border group-hover:scale-110 transition-transform duration-normal`} aria-hidden="true">
-                          <Icon className="h-8 w-8" />
+                    {/* Left: Visual */}
+                    <div className="relative w-48 h-32 lg:w-56 lg:h-36 flex-shrink-0 overflow-hidden rounded-xl">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-secondary/10" aria-hidden="true" />
+                      <div className="relative z-10 absolute inset-0 flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-xl bg-white/50 backdrop-blur-sm flex items-center justify-center border border-border/30">
+                          <CategoryIcon className="h-8 w-8 text-primary/50" aria-hidden="true" />
                         </div>
                       </div>
                     </div>
 
-                    {/* Content */}
+                    {/* Right: Content */}
                     <div className="flex-1 flex flex-col justify-between min-w-0">
                       <div>
-                        <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <span className={`px-2.5 py-1 rounded-full text-xs font-medium font-heading ${colorScheme.bg} ${colorScheme.text} ${colorScheme.border} border`}>
-                            {piece.category}
-                          </span>
-                          <div className={`px-2.5 py-1 rounded-full text-xs font-medium font-heading ${statusScheme.bg} ${statusScheme.text} ${statusScheme.border} border`}>
-                            {piece.status}
+                        <div className="flex items-center gap-3 mb-3">
+                          <div
+                            className={`w-8 h-8 rounded-lg flex items-center justify-center ${statusStyle.bg} ${statusStyle.text} ${statusStyle.border} border`}
+                            aria-hidden="true"
+                          >
+                            <CategoryIcon className="h-4 w-4" />
                           </div>
-                          {piece.featured && (
-                            <span className="flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/10 text-amber-600 border border-amber-200/50">
+                          <span className="text-xs font-medium text-muted-foreground uppercase tracking-widest font-heading">
+                            {article.category}
+                          </span>
+                          {article.featured && (
+                            <span className="ml-auto flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/10 text-amber-600 border border-amber-200/50">
+                              <Star className="h-3 w-3" aria-hidden="true" />
                               <span className="text-xs font-medium font-heading">Featured</span>
                             </span>
                           )}
                         </div>
 
-                        <h3 className="text-h4 font-heading font-medium tracking-tight text-foreground mb-2">
-                          {piece.title}
+                        <h3 className="text-h3 font-heading font-medium tracking-tight text-foreground mb-2 group-hover:text-accent transition-colors">
+                          {article.title}
                         </h3>
 
-                        <p className="text-body text-muted-foreground leading-relaxed line-clamp-2">
-                          {piece.excerpt}
+                        <p className="text-body text-muted-foreground leading-relaxed line-clamp-2 mb-3">
+                          {article.excerpt}
                         </p>
-                      </div>
 
-                      {/* Tags + Actions + Meta */}
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-border/30">
-                        <div className="flex flex-wrap gap-1.5">
-                          {piece.tags.slice(0, 6).map((tag) => (
-                            <span key={tag} className="px-2.5 py-1 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm text-xs font-medium text-foreground hover:border-accent/30 hover:bg-accent/5 transition-all duration-fast">
+                        <div className="flex flex-wrap gap-2">
+                          {article.tags.slice(0, 5).map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2.5 py-1 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm text-xs font-medium text-foreground hover:border-accent/30 hover:bg-accent/5 transition-all duration-fast cursor-default"
+                            >
                               {tag}
                             </span>
                           ))}
-                          {piece.tags.length > 6 && (
+                          {article.tags.length > 5 && (
                             <span className="px-2.5 py-1 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm text-xs font-medium text-muted-foreground">
-                              +{piece.tags.length - 6} more
+                              +{article.tags.length - 5}
                             </span>
                           )}
                         </div>
-                        <div className="flex items-center gap-3 flex-wrap">
-                          <div className="flex items-center gap-2 text-caption text-muted-foreground">
+                      </div>
+
+                      <div className="flex items-center justify-between pt-4 border-t border-border/30 mt-4">
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1">
                             <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
-                            <span>{formatDate(piece.date)}</span>
-                            <span className="text-border">•</span>
+                            {new Date(article.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </span>
+                          <span className="flex items-center gap-1">
                             <Clock className="h-3.5 w-3.5" aria-hidden="true" />
-                            <span>{piece.readTime}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            {piece.githubUrl && (
-                              <a
-                                href={piece.githubUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="glass px-3 py-2 rounded-xl text-sm font-medium text-foreground hover:text-primary transition-colors flex items-center gap-2"
-                                whileHover={{ scale: 1.02 }}
-                                onClick={(e) => e.stopPropagation()}
-                                aria-label="View repository on GitHub"
-                              >
-                                <Github className="h-4 w-4" aria-hidden="true" />
-                                Repo
-                              </a>
-                            )}
-                            {piece.externalUrl && (
-                              <a
-                                href={piece.externalUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="glass px-3 py-2 rounded-xl text-sm font-medium text-foreground hover:text-accent transition-colors flex items-center gap-2"
-                                whileHover={{ scale: 1.02 }}
-                                onClick={(e) => e.stopPropagation()}
-                                aria-label="Read full article"
-                              >
-                                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                                Read
-                              </a>
-                            )}
-                          </div>
+                            {article.readTime}
+                          </span>
+                          <span
+                            className={`px-2 py-0.5 rounded-full text-xs font-medium font-heading ${statusStyle.bg} ${statusStyle.text} ${statusStyle.border} border`}
+                          >
+                            {article.status}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium text-accent group-hover:gap-2 transition-gap flex items-center">
+                            Read
+                            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                          </span>
                         </div>
                       </div>
                     </div>
                   </motion.article>
                 )
-              })}
-            </motion.div>
-          )}
+              }
+            })}
 
-          {/* Empty State */}
-          {filteredWriting.length === 0 && (
-            <motion.div
-              className="text-center py-16"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <Search className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" aria-hidden="true" />
-              <h3 className="text-h3 font-heading font-medium text-foreground mb-2">No articles found</h3>
-              <p className="text-body text-muted-foreground">Try adjusting your search or filters</p>
-            </motion.div>
-          )}
-
-          {/* Results Count */}
-          <motion.div
-            className="mt-8 text-center text-sm text-muted-foreground"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-          >
-            Showing {filteredWriting.length} of {allWriting.length} articles
+            {filteredArticles.length === 0 && (
+              <motion.div
+                className="col-span-full text-center py-20"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <Search className="h-12 w-12 text-muted-foreground/50 mx-auto mb-4" aria-hidden="true" />
+                <h3 className="text-h3 font-heading font-medium text-foreground mb-2">No articles found</h3>
+                <p className="text-body text-muted-foreground">Try adjusting your search or filter criteria.</p>
+              </motion.div>
+            )}
           </motion.div>
 
           {/* Section Divider */}
           <div className="section-divider mt-12 lg:mt-16" aria-hidden="true">
-            <span>End of Chapter Six</span>
+            <span>End of Chapter Three</span>
           </div>
         </div>
       </section>
 
-      {/* Writing Modal */}
-      <WritingModal
-        piece={openPiece!}
-        isOpen={!!openPiece}
-        onClose={handleCloseModal}
-        onNavigate={handleNavigate}
-        hasPrev={hasPrev}
-        hasNext={hasNext}
-      />
+      {/* Article Modal */}
+      <AnimatePresence>
+        {openArticle && (
+          <motion.div
+            className="fixed inset-0 z-[600] flex items-center justify-center p-4 lg:p-8"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { duration: 0.2 } },
+              exit: { opacity: 0, transition: { duration: 0.2 } },
+            }}
+            onClick={handleCloseModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="article-modal-title"
+          >
+            {/* Backdrop */}
+            <motion.div
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { duration: 0.2 } },
+                exit: { opacity: 0, transition: { duration: 0.2 } },
+              }}
+            />
+
+            {/* Modal Window */}
+            <motion.div
+              className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden glass-strong rounded-2xl"
+              variants={{
+                hidden: { opacity: 0, scale: 0.95, y: 20 },
+                visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } },
+                exit: { opacity: 0, scale: 0.95, y: 20, transition: { duration: 0.25, ease: [0.7, 0, 0.84, 0] } },
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="flex items-start justify-between p-6 border-b border-border/30 sticky top-0 bg-background/95 backdrop-blur-sm z-10">
+                <div className="flex-1 pr-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                        openArticle.category === 'Healthcare Technology' ? 'bg-accent/10 text-accent border-accent/20 border' :
+                        openArticle.category === 'Machine Learning' ? 'bg-primary/10 text-primary border-primary/20 border' :
+                        openArticle.category === 'Data Visualization' ? 'bg-secondary/10 text-secondary border-secondary/20 border' :
+                        openArticle.category === 'Entrepreneurship' ? 'bg-accent/10 text-accent border-accent/20 border' :
+                        openArticle.category === 'Software Engineering' ? 'bg-primary/10 text-primary border-primary/20 border' :
+                        'bg-muted-foreground/10 text-muted-foreground border-muted-foreground/20 border'
+                      }`}
+                      aria-hidden="true"
+                    >
+                      {(() => {
+                        const Icon = categoryIcons[openArticle.category] || FileText;
+                        return <Icon className="h-5 w-5" />;
+                      })()}
+                    </div>
+                    <div>
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium font-heading ${
+                        openArticle.status === 'Published'
+                          ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20 border'
+                          : openArticle.status === 'In Progress'
+                          ? 'bg-primary/10 text-primary border-primary/20 border'
+                          : 'bg-amber-500/10 text-amber-600 border-amber-500/20 border'
+                      }`}>
+                        {openArticle.status}
+                      </span>
+                      {openArticle.featured && (
+                        <span className="ml-2 flex items-center gap-1 px-2 py-1 rounded-full bg-amber-500/10 text-amber-600 border border-amber-200/50">
+                          <Star className="h-3 w-3" aria-hidden="true" />
+                          <span className="text-xs font-medium font-heading">Featured</span>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <h2 id="article-modal-title" className="text-h1 lg:text-h2 font-heading font-semibold tracking-tight text-foreground mb-2">
+                    {openArticle.title}
+                  </h2>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
+                      {new Date(openArticle.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+                      {openArticle.readTime}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Close Button */}
+                <motion.button
+                  onClick={handleCloseModal}
+                  className="glass p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-all duration-fast flex-shrink-0"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Close article"
+                >
+                  <X className="h-5 w-5" />
+                </motion.button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="p-6 lg:p-8 overflow-y-auto max-h-[calc(90vh-80px)]">
+                {/* Excerpt */}
+                <div className="prose max-w-none mb-8">
+                  <p className="text-body-lg text-muted-foreground leading-relaxed drop-cap">
+                    {openArticle.excerpt}
+                  </p>
+                </div>
+
+                {/* Full Content */}
+                <div className="prose max-w-none space-y-6">
+                  <p className="text-body text-muted-foreground leading-relaxed">
+                    {openArticle.longDescription}
+                  </p>
+                </div>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mt-8 pt-6 border-t border-border/30">
+                  <Tag className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                  {openArticle.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1.5 rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm text-sm font-medium text-foreground hover:border-accent/30 hover:bg-accent/5 transition-all duration-fast cursor-default"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-wrap gap-3 mt-8 pt-6 border-t border-border/30">
+                  {openArticle.url && (
+                    <motion.a
+                      href={openArticle.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary gap-2"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      aria-label="Read full article"
+                    >
+                      <ExternalLink className="h-5 w-5" aria-hidden="true" />
+                      Read Full Article
+                    </motion.a>
+                  )}
+                  {openArticle.githubUrl && (
+                    <motion.a
+                      href={openArticle.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-secondary gap-2"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      aria-label="View source on GitHub"
+                    >
+                      <Github className="h-5 w-5" aria-hidden="true" />
+                      View Source
+                    </motion.a>
+                  )}
+                  <motion.button
+                    className="btn-outline gap-2"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => navigator.share?.({ title: openArticle.title, text: openArticle.excerpt, url: window.location.href })}
+                  >
+                    <Share2 className="h-5 w-5" aria-hidden="true" />
+                    Share
+                  </motion.button>
+                  <motion.button
+                    className="btn-outline gap-2"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      const text = `${openArticle.title}\n${openArticle.url || window.location.href}\n\n${openArticle.excerpt}`
+                      navigator.clipboard.writeText(text)
+                    }}
+                  >
+                    <Clipboard className="h-5 w-5" aria-hidden="true" />
+                    Copy Link
+                  </motion.button>
+                </div>
+              </div>
+
+              {/* Modal Footer Navigation */}
+              {(hasPrev || hasNext) && (
+                <div className="flex items-center justify-between p-6 border-t border-border/30 bg-background/50 backdrop-blur-sm">
+                  <motion.button
+                    onClick={() => hasPrev && handleNavigate('prev')}
+                    disabled={!hasPrev}
+                    className="btn-secondary gap-2 disabled:opacity-30 disabled:cursor-not-allowed"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    aria-label="Previous article"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                    Previous Article
+                  </motion.button>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <kbd className="px-2 py-1 rounded bg-background border border-border/50 font-mono">←</kbd>
+                    <span>Navigate</span>
+                    <kbd className="px-2 py-1 rounded bg-background border border-border/50 font-mono">→</kbd>
+                  </div>
+                  <motion.button
+                    onClick={() => hasNext && handleNavigate('next')}
+                    disabled={!hasNext}
+                    className="btn-secondary gap-2 ml-auto disabled:opacity-30 disabled:cursor-not-allowed"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    aria-label="Next article"
+                  >
+                    Next Article
+                    <ChevronRight className="h-4 w-4" />
+                  </motion.button>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
